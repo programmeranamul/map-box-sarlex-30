@@ -1,0 +1,174 @@
+body, html {
+  overflow: hidden;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #fafbfc;
+}
+
+.container {
+  display: flex;
+  max-width: 1000px;
+  margin: auto;
+  padding: 40px 20px;
+  gap: 40px;
+  height: 100vh;
+}
+
+.sidebar {
+  flex: 1;
+  max-width: 350px;
+  background: #fff;
+  padding: 2rem 1.5rem;
+  overflow-y: auto;
+  border-right: 2px solid #e0e0e0;
+  box-sizing: border-box;
+}
+
+.sidebar h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.step {
+  margin-bottom: 30px;
+}
+
+.step h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  margin: 5px 0;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.theme-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.theme-buttons button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.theme-buttons button:nth-child(1) { background: #e0f7fa; }
+.theme-buttons button:nth-child(2) { background: #ffd3b6; }
+.theme-buttons button:nth-child(3) { background: #d0f0c0; }
+.theme-buttons button:nth-child(4) { background: #e0aa3e; }
+.theme-buttons button:nth-child(5) { background: #b39ddb; }
+
+button {
+  cursor: pointer;
+  padding: 12px 16px;
+  font-size: 14px;
+  border: none;
+  background: #eee;
+  border-radius: 6px;
+}
+
+.download-btn {
+  width: 100%;
+  background: #007bff;
+  color: #fff;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.poster {
+  flex: 2;
+  background: white;
+  border: 20px solid white;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.5s ease;
+}
+
+.portrait {
+  width: 420px;
+  height: 600px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.landscape {
+  width: 600px;
+  height: 400px;
+}
+
+.map-container {
+  flex: 1;
+  position: relative;
+}
+
+.mapbox-map {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.details {
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #003b5c;
+  text-shadow: none;
+}
+
+.details h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.details h2 {
+  margin: 8px 0 0 0;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+/* Themes */
+.ocean .map-container { background: #e0f7fa; }
+.sunset .map-container { background: #ffd3b6; }
+.mint .map-container { background: #d0f0c0; }
+.desert .map-container { background: #e0aa3e; }
+.violet .map-container { background: #b39ddb; }
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .sidebar {
+    max-width: none;
+    border-right: none;
+    border-bottom: 2px solid #e0e0e0;
+  }
+  
+  .poster {
+    width: 100%;
+    height: 400px;
+  }
+  
+  .portrait, .landscape {
+    width: 100%;
+    height: 400px;
+  }
+}
