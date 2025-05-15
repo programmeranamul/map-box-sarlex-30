@@ -31,16 +31,17 @@ export default function LocationList({ locations, setLocations }) {
 
   return (
     <div>
-      <form onSubmit={addLocation}>
+      <form className="location-form" onSubmit={addLocation}>
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Add your locations"
+          className="modern-input"
         />
-        <button type="submit">Add</button>
+        <button type="submit" className="add-btn" aria-label="Add location">+</button>
       </form>
-      <ul>
+      <ul className="location-list">
         {locations.map((loc, i) => (
           <li key={i}>{loc.name}</li>
         ))}

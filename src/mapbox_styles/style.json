@@ -1,20 +1,5029 @@
 {
-    "version": 8,
-    "name": "Custom Style",
-    "sources": {
-      "openstreetmap": {
-        "type": "vector",
-        "url": "mapbox://mapbox.terrain-rgb"
-      }
-    },
-    "layers": [
-      {
-        "id": "background",
-        "type": "background",
-        "paint": {
-          "background-color": "#ff0f0"
-        }
-      }
-    ]
-  }
-  
+        "version": 8,
+        "name": "Monochrome - Pink",
+        "metadata": {
+            "mapbox:type": "default",
+            "mapbox:variation": "monochrome-sky-v1",
+            "mapbox:autocomposite": true,
+            "mapbox:sdk-support": {
+                "js": "3.8.0",
+                "android": "11.9.0",
+                "ios": "11.9.0"
+            },
+            "mapbox:origin": "monochrome-dark-v1",
+            "mapbox:groups": {
+                "Transit, transit-labels": {
+                    "name": "Transit, transit-labels",
+                    "collapsed": true
+                },
+                "Administrative boundaries, admin": {
+                    "name": "Administrative boundaries, admin",
+                    "collapsed": true
+                },
+                "Land & water, built": {
+                    "name": "Land & water, built",
+                    "collapsed": true
+                },
+                "Transit, bridges": {
+                    "name": "Transit, bridges",
+                    "collapsed": true
+                },
+                "Transit, surface": {
+                    "name": "Transit, surface",
+                    "collapsed": true
+                },
+                "Land & water, land": {
+                    "name": "Land & water, land",
+                    "collapsed": true
+                },
+                "Road network, bridges": {
+                    "name": "Road network, bridges",
+                    "collapsed": true
+                },
+                "Road network, tunnels": {
+                    "name": "Road network, tunnels",
+                    "collapsed": true
+                },
+                "Road network, road-labels": {
+                    "name": "Road network, road-labels",
+                    "collapsed": true
+                },
+                "Buildings, built": {
+                    "name": "Buildings, built",
+                    "collapsed": true
+                },
+                "Natural features, natural-labels": {
+                    "name": "Natural features, natural-labels",
+                    "collapsed": true
+                },
+                "Road network, surface": {
+                    "name": "Road network, surface",
+                    "collapsed": true
+                },
+                "Walking, cycling, etc., barriers-bridges": {
+                    "name": "Walking, cycling, etc., barriers-bridges",
+                    "collapsed": true
+                },
+                "Place labels, place-labels": {
+                    "name": "Place labels, place-labels",
+                    "collapsed": true
+                },
+                "Buildings, extruded": {
+                    "name": "Buildings, extruded",
+                    "collapsed": true
+                },
+                "Point of interest labels, poi-labels": {
+                    "name": "Point of interest labels, poi-labels",
+                    "collapsed": true
+                },
+                "Walking, cycling, etc., tunnels": {
+                    "name": "Walking, cycling, etc., tunnels",
+                    "collapsed": true
+                },
+                "Walking, cycling, etc., surface": {
+                    "name": "Walking, cycling, etc., surface",
+                    "collapsed": true
+                },
+                "Transit, built": {
+                    "name": "Transit, built",
+                    "collapsed": true
+                },
+                "Land & water, water": {
+                    "name": "Land & water, water",
+                    "collapsed": true
+                }
+            }
+        },
+        "center": [
+            -81.88009075271123,
+            2.842170943040401e-14
+        ],
+        "zoom": 0.541096594891533,
+        "bearing": 0,
+        "pitch": 0,
+        "lights": [
+            {
+                "id": "flat",
+                "type": "flat",
+                "properties": {}
+            }
+        ],
+        "sources": {
+            "composite": {
+                "url": "mapbox://mapbox.mapbox-streets-v8,mapbox.mapbox-terrain-v2",
+                "type": "vector",
+                "data": {
+                    "attribution": "<a href=\"https://www.mapbox.com/about/maps/\" target=\"_blank\" title=\"Mapbox\" aria-label=\"Mapbox\">&copy; Mapbox</a> <a href=\"https://www.openstreetmap.org/copyright/\" target=\"_blank\" title=\"OpenStreetMap\" aria-label=\"OpenStreetMap\">&copy; OpenStreetMap</a> <a class=\"mapbox-improve-map\" href=\"https://www.mapbox.com/contribute/\" target=\"_blank\" title=\"Improve this map\" aria-label=\"Improve this map\">Improve this map</a>",
+                    "bounds": [
+                        -180,
+                        -85,
+                        180,
+                        85
+                    ],
+                    "center": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "constituents": [
+                        {
+                            "maxzoom": 16,
+                            "minzoom": 0,
+                            "source": "mapbox.mapbox-streets-v8"
+                        },
+                        {
+                            "maxzoom": 15,
+                            "minzoom": 0,
+                            "source": "mapbox.mapbox-terrain-v2"
+                        }
+                    ],
+                    "format": "pbf",
+                    "language_options": {
+                        "all": "Every available language",
+                        "ar": "Arabic",
+                        "bg": "Bulgarian",
+                        "ca": "Catalan",
+                        "cs": "Czech",
+                        "da": "Danish",
+                        "de": "German",
+                        "el": "Greek",
+                        "en": "English",
+                        "es": "Spanish",
+                        "fa": "Farsi",
+                        "fi": "Finnish",
+                        "fr": "French",
+                        "he": "Hebrew",
+                        "hr": "Croatian",
+                        "hu": "Hungarian",
+                        "id": "Indonesian",
+                        "it": "Italian",
+                        "ja": "Japanese",
+                        "ka": "Georgian",
+                        "ko": "Korean",
+                        "local": "Renderable local language",
+                        "lv": "Latvian",
+                        "ms": "Malay",
+                        "nb": "Norwegian Bokmål",
+                        "nl": "Dutch",
+                        "no": "Norwegian",
+                        "pl": "Polish",
+                        "pt": "Portuguese",
+                        "ro": "Romanian",
+                        "ru": "Russian",
+                        "sk": "Slovak",
+                        "sl": "Slovenian",
+                        "sq": "Albanian",
+                        "sr": "Serbian",
+                        "sv": "Swedish",
+                        "th": "Thai",
+                        "tl": "Tagalog",
+                        "tr": "Turkish",
+                        "uk": "Ukrainian",
+                        "vi": "Vietnamese",
+                        "zh-Hans": "Simplified Chinese",
+                        "zh-Hant": "Traditional Chinese"
+                    },
+                    "mapbox_logo": true,
+                    "maskLevel": 9,
+                    "maxzoom": 16,
+                    "minzoom": 0,
+                    "name": "Mapbox Terrain v2 + Mapbox Streets v8",
+                    "scheme": "xyz",
+                    "tilejson": "3.0.0",
+                    "tiles": [
+                        "mapbox://tiles/mapbox.mapbox-streets-v8,mapbox.mapbox-terrain-v2/{z}/{x}/{y}.vector.pbf"
+                    ],
+                    "vector_layers": [
+                        {
+                            "id": "landuse",
+                            "minzoom": 5,
+                            "source": "mapbox.mapbox-streets-v8"
+                        },
+                        {
+                            "id": "waterway",
+                            "minzoom": 7,
+                            "source": "mapbox.mapbox-streets-v8"
+                        },
+                        {
+                            "id": "water",
+                            "minzoom": 0,
+                            "source": "mapbox.mapbox-streets-v8"
+                        },
+                        {
+                            "id": "aeroway",
+                            "minzoom": 9,
+                            "source": "mapbox.mapbox-streets-v8"
+                        },
+                        {
+                            "id": "structure",
+                            "minzoom": 13,
+                            "source": "mapbox.mapbox-streets-v8"
+                        },
+                        {
+                            "id": "building",
+                            "minzoom": 12,
+                            "source": "mapbox.mapbox-streets-v8"
+                        },
+                        {
+                            "id": "landuse_overlay",
+                            "minzoom": 5,
+                            "source": "mapbox.mapbox-streets-v8"
+                        },
+                        {
+                            "id": "road",
+                            "minzoom": 3,
+                            "source": "mapbox.mapbox-streets-v8"
+                        },
+                        {
+                            "id": "admin",
+                            "minzoom": 0,
+                            "source": "mapbox.mapbox-streets-v8"
+                        },
+                        {
+                            "id": "place_label",
+                            "minzoom": 0,
+                            "source": "mapbox.mapbox-streets-v8"
+                        },
+                        {
+                            "id": "airport_label",
+                            "minzoom": 8,
+                            "source": "mapbox.mapbox-streets-v8"
+                        },
+                        {
+                            "id": "transit_stop_label",
+                            "minzoom": 5,
+                            "source": "mapbox.mapbox-streets-v8"
+                        },
+                        {
+                            "id": "natural_label",
+                            "minzoom": 0,
+                            "source": "mapbox.mapbox-streets-v8"
+                        },
+                        {
+                            "id": "poi_label",
+                            "minzoom": 6,
+                            "source": "mapbox.mapbox-streets-v8"
+                        },
+                        {
+                            "id": "motorway_junction",
+                            "minzoom": 9,
+                            "source": "mapbox.mapbox-streets-v8"
+                        },
+                        {
+                            "id": "housenum_label",
+                            "minzoom": 16,
+                            "source": "mapbox.mapbox-streets-v8"
+                        },
+                        {
+                            "id": "landcover",
+                            "maxzoom": 22,
+                            "minzoom": 0,
+                            "source": "mapbox.mapbox-terrain-v2"
+                        },
+                        {
+                            "id": "hillshade",
+                            "maxzoom": 22,
+                            "minzoom": 0,
+                            "source": "mapbox.mapbox-terrain-v2"
+                        },
+                        {
+                            "id": "contour",
+                            "maxzoom": 22,
+                            "minzoom": 0,
+                            "source": "mapbox.mapbox-terrain-v2"
+                        }
+                    ],
+                    "worldview_default": "US",
+                    "worldview_options": {
+                        "ALL": "Every available worldview",
+                        "AR": "Argentina",
+                        "CN": "China",
+                        "IN": "India",
+                        "JP": "Japan",
+                        "MA": "Morocco",
+                        "RS": "Serbia",
+                        "RU": "Russia",
+                        "TR": "Turkey",
+                        "US": "United States"
+                    }
+                }
+            }
+        },
+        "sprite": "mapbox://sprites/aminmajid3/cm5cqivwv00eb01saf9t60mjs/dwr8ahy5qa7d57o7yr62s2n1s",
+        "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
+        "layers": [
+            {
+                "id": "land",
+                "type": "background",
+                "layout": {},
+                "paint": {
+                    "background-color": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        9,
+                        "#d470a2",
+                        11,
+                        "rgb(186, 58, 122)"
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "land-and-water",
+                    "mapbox:group": "Land & water, land"
+                }
+            },
+            {
+                "minzoom": 5,
+                "layout": {},
+                "metadata": {
+                    "mapbox:featureComponent": "land-and-water",
+                    "mapbox:group": "Land & water, land"
+                },
+                "filter": [
+                    "==",
+                    [
+                        "get",
+                        "class"
+                    ],
+                    "national_park"
+                ],
+                "type": "fill",
+                "source": "composite",
+                "id": "national-park",
+                "paint": {
+                    "fill-color": "rgb(168, 62, 115)",
+                    "fill-opacity": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        5,
+                        0,
+                        6,
+                        0.6,
+                        12,
+                        0.2
+                    ]
+                },
+                "source-layer": "landuse_overlay"
+            },
+            {
+                "minzoom": 5,
+                "layout": {},
+                "metadata": {
+                    "mapbox:featureComponent": "land-and-water",
+                    "mapbox:group": "Land & water, land"
+                },
+                "filter": [
+                    "all",
+                    [
+                        ">=",
+                        [
+                            "to-number",
+                            [
+                                "get",
+                                "sizerank"
+                            ]
+                        ],
+                        0
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        [
+                            "agriculture",
+                            "wood",
+                            "grass",
+                            "scrub",
+                            "glacier",
+                            "pitch",
+                            "sand"
+                        ],
+                        [
+                            "step",
+                            [
+                                "zoom"
+                            ],
+                            false,
+                            11,
+                            true
+                        ],
+                        "residential",
+                        [
+                            "step",
+                            [
+                                "zoom"
+                            ],
+                            true,
+                            10,
+                            false
+                        ],
+                        [
+                            "park",
+                            "airport"
+                        ],
+                        [
+                            "step",
+                            [
+                                "zoom"
+                            ],
+                            false,
+                            8,
+                            [
+                                "case",
+                                [
+                                    "==",
+                                    [
+                                        "get",
+                                        "sizerank"
+                                    ],
+                                    1
+                                ],
+                                true,
+                                false
+                            ],
+                            10,
+                            true
+                        ],
+                        false
+                    ],
+                    [
+                        "<=",
+                        [
+                            "-",
+                            [
+                                "to-number",
+                                [
+                                    "get",
+                                    "sizerank"
+                                ]
+                            ],
+                            [
+                                "interpolate",
+                                [
+                                    "exponential",
+                                    1.5
+                                ],
+                                [
+                                    "zoom"
+                                ],
+                                12,
+                                0,
+                                18,
+                                14
+                            ]
+                        ],
+                        8
+                    ]
+                ],
+                "type": "fill",
+                "source": "composite",
+                "id": "landuse",
+                "paint": {
+                    "fill-color": "rgb(168, 62, 115)",
+                    "fill-opacity": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        8,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            "residential",
+                            0.8,
+                            0.2
+                        ],
+                        10,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            "residential",
+                            0,
+                            1
+                        ]
+                    ],
+                    "fill-antialias": false
+                },
+                "source-layer": "landuse"
+            },
+            {
+                "layout": {},
+                "metadata": {
+                    "mapbox:featureComponent": "land-and-water",
+                    "mapbox:group": "Land & water, land"
+                },
+                "maxzoom": 16,
+                "filter": [
+                    "all",
+                    [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        [
+                            "==",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            "shadow"
+                        ],
+                        11,
+                        true
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "level"
+                        ],
+                        89,
+                        true,
+                        78,
+                        [
+                            "step",
+                            [
+                                "zoom"
+                            ],
+                            false,
+                            5,
+                            true
+                        ],
+                        67,
+                        [
+                            "step",
+                            [
+                                "zoom"
+                            ],
+                            false,
+                            9,
+                            true
+                        ],
+                        56,
+                        [
+                            "step",
+                            [
+                                "zoom"
+                            ],
+                            false,
+                            6,
+                            true
+                        ],
+                        94,
+                        [
+                            "step",
+                            [
+                                "zoom"
+                            ],
+                            false,
+                            11,
+                            true
+                        ],
+                        90,
+                        [
+                            "step",
+                            [
+                                "zoom"
+                            ],
+                            false,
+                            12,
+                            true
+                        ],
+                        false
+                    ]
+                ],
+                "type": "fill",
+                "source": "composite",
+                "id": "hillshade",
+                "paint": {
+                    "fill-color": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        14,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            "shadow",
+                            "rgba(198, 91, 144, 0.06)",
+                            "rgba(202, 85, 143, 0.04)"
+                        ],
+                        16,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            "shadow",
+                            "rgba(198, 91, 144, 0)",
+                            "rgba(202, 85, 143, 0)"
+                        ]
+                    ],
+                    "fill-antialias": false
+                },
+                "source-layer": "hillshade"
+            },
+            {
+                "id": "waterway",
+                "type": "line",
+                "source": "composite",
+                "source-layer": "waterway",
+                "minzoom": 8,
+                "layout": {
+                    "line-cap": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        "butt",
+                        11,
+                        "round"
+                    ],
+                    "line-join": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        "miter",
+                        11,
+                        "round"
+                    ]
+                },
+                "paint": {
+                    "line-color": "rgb(152, 53, 103)",
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.3
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        9,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "canal",
+                                "river"
+                            ],
+                            0.1,
+                            0
+                        ],
+                        20,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "canal",
+                                "river"
+                            ],
+                            8,
+                            3
+                        ]
+                    ],
+                    "line-opacity": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        8,
+                        0,
+                        8.5,
+                        1
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "land-and-water",
+                    "mapbox:group": "Land & water, water"
+                }
+            },
+            {
+                "id": "water",
+                "type": "fill",
+                "source": "composite",
+                "source-layer": "water",
+                "layout": {},
+                "paint": {
+                    "fill-color": "rgb(152, 53, 103)"
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "land-and-water",
+                    "mapbox:group": "Land & water, water"
+                }
+            },
+            {
+                "minzoom": 13,
+                "layout": {},
+                "metadata": {
+                    "mapbox:featureComponent": "land-and-water",
+                    "mapbox:group": "Land & water, built"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        "land"
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "Polygon"
+                    ]
+                ],
+                "type": "fill",
+                "source": "composite",
+                "id": "land-structure-polygon",
+                "paint": {
+                    "fill-color": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        9,
+                        "#d470a2",
+                        11,
+                        "rgb(186, 58, 122)"
+                    ]
+                },
+                "source-layer": "structure"
+            },
+            {
+                "minzoom": 13,
+                "layout": {
+                    "line-cap": "square"
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "land-and-water",
+                    "mapbox:group": "Land & water, built"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        "land"
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "type": "line",
+                "source": "composite",
+                "id": "land-structure-line",
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.99
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        14,
+                        0.75,
+                        20,
+                        40
+                    ],
+                    "line-color": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        9,
+                        "#d470a2",
+                        11,
+                        "rgb(186, 58, 122)"
+                    ]
+                },
+                "source-layer": "structure"
+            },
+            {
+                "id": "aeroway-polygon",
+                "type": "fill",
+                "source": "composite",
+                "source-layer": "aeroway",
+                "minzoom": 11,
+                "filter": [
+                    "all",
+                    [
+                        "match",
+                        [
+                            "get",
+                            "type"
+                        ],
+                        [
+                            "runway",
+                            "taxiway",
+                            "helipad"
+                        ],
+                        true,
+                        false
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "Polygon"
+                    ]
+                ],
+                "paint": {
+                    "fill-color": "rgb(202, 85, 144)",
+                    "fill-opacity": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        10,
+                        0,
+                        11,
+                        1
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "transit",
+                    "mapbox:group": "Transit, built"
+                }
+            },
+            {
+                "id": "aeroway-line",
+                "type": "line",
+                "source": "composite",
+                "source-layer": "aeroway",
+                "minzoom": 9,
+                "filter": [
+                    "==",
+                    [
+                        "geometry-type"
+                    ],
+                    "LineString"
+                ],
+                "paint": {
+                    "line-color": "rgb(202, 85, 144)",
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        9,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "type"
+                            ],
+                            "runway",
+                            1,
+                            0.5
+                        ],
+                        18,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "type"
+                            ],
+                            "runway",
+                            80,
+                            20
+                        ]
+                    ],
+                    "line-opacity": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        10,
+                        0,
+                        11,
+                        1
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "transit",
+                    "mapbox:group": "Transit, built"
+                }
+            },
+            {
+                "minzoom": 15,
+                "layout": {
+                    "line-cap": "round"
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "walking-cycling",
+                    "mapbox:group": "Walking, cycling, etc., tunnels"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        "tunnel"
+                    ],
+                    [
+                        "==",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        "path"
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "type"
+                        ],
+                        [
+                            "hiking",
+                            "mountain_bike",
+                            "trail"
+                        ],
+                        true,
+                        false
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "type": "line",
+                "source": "composite",
+                "id": "tunnel-path-trail",
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        15,
+                        1,
+                        18,
+                        4
+                    ],
+                    "line-color": "rgb(158, 56, 107)",
+                    "line-dasharray": [
+                        10,
+                        0
+                    ]
+                },
+                "source-layer": "road"
+            },
+            {
+                "minzoom": 12,
+                "layout": {},
+                "metadata": {
+                    "mapbox:featureComponent": "walking-cycling",
+                    "mapbox:group": "Walking, cycling, etc., tunnels"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        "tunnel"
+                    ],
+                    [
+                        "==",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        "path"
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "type"
+                        ],
+                        [
+                            "cycleway",
+                            "piste"
+                        ],
+                        true,
+                        false
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "type": "line",
+                "source": "composite",
+                "id": "tunnel-path-cycleway-piste",
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        15,
+                        1,
+                        18,
+                        4
+                    ],
+                    "line-color": "rgb(158, 56, 107)",
+                    "line-dasharray": [
+                        10,
+                        0
+                    ]
+                },
+                "source-layer": "road"
+            },
+            {
+                "minzoom": 15,
+                "layout": {
+                    "line-cap": "round"
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "walking-cycling",
+                    "mapbox:group": "Walking, cycling, etc., tunnels"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        "tunnel"
+                    ],
+                    [
+                        "==",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        "path"
+                    ],
+                    [
+                        "!=",
+                        [
+                            "get",
+                            "type"
+                        ],
+                        "steps"
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "type": "line",
+                "source": "composite",
+                "id": "tunnel-path",
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        15,
+                        1,
+                        18,
+                        4
+                    ],
+                    "line-color": "rgb(158, 56, 107)",
+                    "line-dasharray": [
+                        10,
+                        0
+                    ]
+                },
+                "source-layer": "road"
+            },
+            {
+                "id": "tunnel-steps",
+                "type": "line",
+                "source": "composite",
+                "source-layer": "road",
+                "minzoom": 15,
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        "tunnel"
+                    ],
+                    [
+                        "==",
+                        [
+                            "get",
+                            "type"
+                        ],
+                        "steps"
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        15,
+                        1,
+                        16,
+                        1.6,
+                        18,
+                        6
+                    ],
+                    "line-color": "rgb(158, 56, 107)",
+                    "line-dasharray": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        [
+                            "literal",
+                            [
+                                1,
+                                0
+                            ]
+                        ],
+                        15,
+                        [
+                            "literal",
+                            [
+                                1.75,
+                                1
+                            ]
+                        ],
+                        16,
+                        [
+                            "literal",
+                            [
+                                1,
+                                0.75
+                            ]
+                        ],
+                        17,
+                        [
+                            "literal",
+                            [
+                                0.3,
+                                0.3
+                            ]
+                        ]
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "walking-cycling",
+                    "mapbox:group": "Walking, cycling, etc., tunnels"
+                }
+            },
+            {
+                "id": "tunnel-pedestrian",
+                "type": "line",
+                "source": "composite",
+                "source-layer": "road",
+                "minzoom": 15,
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        "tunnel"
+                    ],
+                    [
+                        "==",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        "pedestrian"
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        14,
+                        0.5,
+                        18,
+                        12
+                    ],
+                    "line-color": "rgb(158, 56, 107)",
+                    "line-dasharray": [
+                        10,
+                        0
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "walking-cycling",
+                    "mapbox:group": "Walking, cycling, etc., tunnels"
+                }
+            },
+            {
+                "id": "tunnel-simple",
+                "type": "line",
+                "source": "composite",
+                "source-layer": "road",
+                "minzoom": 13,
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        "tunnel"
+                    ],
+                    [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "motorway_link",
+                                "trunk",
+                                "trunk_link",
+                                "primary",
+                                "secondary",
+                                "tertiary",
+                                "street",
+                                "street_limited",
+                                "primary_link",
+                                "track"
+                            ],
+                            true,
+                            false
+                        ],
+                        14,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "motorway_link",
+                                "trunk",
+                                "trunk_link",
+                                "primary",
+                                "primary_link",
+                                "secondary",
+                                "secondary_link",
+                                "tertiary",
+                                "tertiary_link",
+                                "street",
+                                "street_limited",
+                                "service",
+                                "track"
+                            ],
+                            true,
+                            false
+                        ]
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        13,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "trunk",
+                                "primary"
+                            ],
+                            2.4,
+                            [
+                                "secondary",
+                                "tertiary"
+                            ],
+                            1.5,
+                            [
+                                "motorway_link",
+                                "trunk_link",
+                                "street",
+                                "street_limited",
+                                "primary_link"
+                            ],
+                            0.6,
+                            0.5
+                        ],
+                        18,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "trunk",
+                                "primary"
+                            ],
+                            19.2,
+                            [
+                                "secondary",
+                                "tertiary"
+                            ],
+                            15.6,
+                            [
+                                "motorway_link",
+                                "trunk_link",
+                                "street",
+                                "street_limited",
+                                "primary_link"
+                            ],
+                            10.799999999999999,
+                            7.199999999999999
+                        ],
+                        22,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "trunk",
+                                "primary"
+                            ],
+                            192,
+                            [
+                                "secondary",
+                                "tertiary"
+                            ],
+                            156,
+                            [
+                                "motorway_link",
+                                "trunk_link",
+                                "primary_link",
+                                "street",
+                                "street_limited"
+                            ],
+                            108,
+                            72
+                        ]
+                    ],
+                    "line-color": "rgb(202, 85, 143)"
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "road-network",
+                    "mapbox:group": "Road network, tunnels"
+                }
+            },
+            {
+                "minzoom": 12,
+                "layout": {
+                    "line-cap": "round",
+                    "line-join": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        "miter",
+                        14,
+                        "round"
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "walking-cycling",
+                    "mapbox:group": "Walking, cycling, etc., surface"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        "path"
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "type"
+                        ],
+                        [
+                            "hiking",
+                            "mountain_bike",
+                            "trail"
+                        ],
+                        true,
+                        false
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        [
+                            "none",
+                            "ford"
+                        ],
+                        true,
+                        false
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "type": "line",
+                "source": "composite",
+                "id": "road-path-trail",
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        15,
+                        1,
+                        18,
+                        4
+                    ],
+                    "line-color": "rgb(202, 85, 143)",
+                    "line-dasharray": [
+                        10,
+                        0
+                    ]
+                },
+                "source-layer": "road"
+            },
+            {
+                "minzoom": 12,
+                "layout": {
+                    "line-join": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        "miter",
+                        14,
+                        "round"
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "walking-cycling",
+                    "mapbox:group": "Walking, cycling, etc., surface"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        "path"
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "type"
+                        ],
+                        [
+                            "cycleway",
+                            "piste"
+                        ],
+                        true,
+                        false
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        [
+                            "none",
+                            "ford"
+                        ],
+                        true,
+                        false
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "type": "line",
+                "source": "composite",
+                "id": "road-path-cycleway-piste",
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        15,
+                        1,
+                        18,
+                        4
+                    ],
+                    "line-color": "rgb(202, 85, 143)",
+                    "line-dasharray": [
+                        10,
+                        0
+                    ]
+                },
+                "source-layer": "road"
+            },
+            {
+                "minzoom": 12,
+                "layout": {
+                    "line-cap": "round",
+                    "line-join": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        "miter",
+                        14,
+                        "round"
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "walking-cycling",
+                    "mapbox:group": "Walking, cycling, etc., surface"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        "path"
+                    ],
+                    [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        [
+                            "!",
+                            [
+                                "match",
+                                [
+                                    "get",
+                                    "type"
+                                ],
+                                [
+                                    "steps",
+                                    "sidewalk",
+                                    "crossing"
+                                ],
+                                true,
+                                false
+                            ]
+                        ],
+                        16,
+                        [
+                            "!=",
+                            [
+                                "get",
+                                "type"
+                            ],
+                            "steps"
+                        ]
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        [
+                            "none",
+                            "ford"
+                        ],
+                        true,
+                        false
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "type": "line",
+                "source": "composite",
+                "id": "road-path",
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        13,
+                        0.5,
+                        14,
+                        1,
+                        15,
+                        1,
+                        18,
+                        4
+                    ],
+                    "line-color": "rgb(202, 85, 143)",
+                    "line-dasharray": [
+                        10,
+                        0
+                    ]
+                },
+                "source-layer": "road"
+            },
+            {
+                "minzoom": 14,
+                "layout": {
+                    "line-join": "round"
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "walking-cycling",
+                    "mapbox:group": "Walking, cycling, etc., surface"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "type"
+                        ],
+                        "steps"
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        [
+                            "none",
+                            "ford"
+                        ],
+                        true,
+                        false
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "type": "line",
+                "source": "composite",
+                "id": "road-steps",
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        15,
+                        1,
+                        16,
+                        1.6,
+                        18,
+                        6
+                    ],
+                    "line-color": "rgb(202, 85, 143)",
+                    "line-dasharray": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        [
+                            "literal",
+                            [
+                                1,
+                                0
+                            ]
+                        ],
+                        15,
+                        [
+                            "literal",
+                            [
+                                1.75,
+                                1
+                            ]
+                        ],
+                        16,
+                        [
+                            "literal",
+                            [
+                                1,
+                                0.75
+                            ]
+                        ],
+                        17,
+                        [
+                            "literal",
+                            [
+                                0.3,
+                                0.3
+                            ]
+                        ]
+                    ]
+                },
+                "source-layer": "road"
+            },
+            {
+                "minzoom": 12,
+                "layout": {
+                    "line-cap": "round",
+                    "line-join": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        "miter",
+                        14,
+                        "round"
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "walking-cycling",
+                    "mapbox:group": "Walking, cycling, etc., surface"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        "pedestrian"
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        [
+                            "none",
+                            "ford"
+                        ],
+                        true,
+                        false
+                    ],
+                    [
+                        "case",
+                        [
+                            "has",
+                            "layer"
+                        ],
+                        [
+                            ">=",
+                            [
+                                "get",
+                                "layer"
+                            ],
+                            0
+                        ],
+                        true
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "type": "line",
+                "source": "composite",
+                "id": "road-pedestrian",
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        14,
+                        0.5,
+                        18,
+                        12
+                    ],
+                    "line-color": "rgb(202, 85, 143)",
+                    "line-dasharray": [
+                        10,
+                        0
+                    ]
+                },
+                "source-layer": "road"
+            },
+            {
+                "minzoom": 5,
+                "layout": {
+                    "line-cap": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        "butt",
+                        14,
+                        "round"
+                    ],
+                    "line-join": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        "miter",
+                        14,
+                        "round"
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "road-network",
+                    "mapbox:group": "Road network, surface"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "trunk"
+                            ],
+                            true,
+                            false
+                        ],
+                        6,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "trunk",
+                                "primary"
+                            ],
+                            true,
+                            false
+                        ],
+                        8,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "trunk",
+                                "primary",
+                                "secondary"
+                            ],
+                            true,
+                            false
+                        ],
+                        10,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "trunk",
+                                "primary",
+                                "secondary",
+                                "tertiary",
+                                "motorway_link",
+                                "trunk_link"
+                            ],
+                            true,
+                            false
+                        ],
+                        11,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "motorway_link",
+                                "trunk",
+                                "trunk_link",
+                                "primary",
+                                "secondary",
+                                "tertiary",
+                                "street"
+                            ],
+                            true,
+                            false
+                        ],
+                        12,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "motorway_link",
+                                "trunk",
+                                "trunk_link",
+                                "primary",
+                                "secondary",
+                                "tertiary",
+                                "street",
+                                "street_limited",
+                                "primary_link"
+                            ],
+                            true,
+                            false
+                        ],
+                        13,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "motorway_link",
+                                "trunk",
+                                "trunk_link",
+                                "primary",
+                                "secondary",
+                                "tertiary",
+                                "street",
+                                "street_limited",
+                                "primary_link",
+                                "track"
+                            ],
+                            true,
+                            false
+                        ],
+                        14,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "motorway_link",
+                                "trunk",
+                                "trunk_link",
+                                "primary",
+                                "primary_link",
+                                "secondary",
+                                "secondary_link",
+                                "tertiary",
+                                "tertiary_link",
+                                "street",
+                                "street_limited",
+                                "service",
+                                "track"
+                            ],
+                            true,
+                            false
+                        ]
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        [
+                            "none",
+                            "ford"
+                        ],
+                        true,
+                        false
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "type": "line",
+                "source": "composite",
+                "id": "road-simple",
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        5,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "trunk",
+                                "primary"
+                            ],
+                            0.44999999999999996,
+                            [
+                                "secondary",
+                                "tertiary"
+                            ],
+                            0.06,
+                            0
+                        ],
+                        13,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "trunk",
+                                "primary"
+                            ],
+                            2.4,
+                            [
+                                "secondary",
+                                "tertiary"
+                            ],
+                            1.5,
+                            [
+                                "motorway_link",
+                                "trunk_link",
+                                "primary_link",
+                                "street",
+                                "street_limited"
+                            ],
+                            0.6,
+                            0.3
+                        ],
+                        18,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "trunk",
+                                "primary"
+                            ],
+                            19.2,
+                            [
+                                "secondary",
+                                "tertiary"
+                            ],
+                            15.6,
+                            [
+                                "motorway_link",
+                                "trunk_link",
+                                "primary_link",
+                                "street",
+                                "street_limited"
+                            ],
+                            10.799999999999999,
+                            6
+                        ],
+                        22,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "trunk",
+                                "primary"
+                            ],
+                            192,
+                            [
+                                "secondary",
+                                "tertiary"
+                            ],
+                            156,
+                            [
+                                "motorway_link",
+                                "trunk_link",
+                                "primary_link",
+                                "street",
+                                "street_limited"
+                            ],
+                            108,
+                            60
+                        ]
+                    ],
+                    "line-color": "rgb(202, 85, 143)"
+                },
+                "source-layer": "road"
+            },
+            {
+                "id": "road-rail",
+                "type": "line",
+                "source": "composite",
+                "source-layer": "road",
+                "minzoom": 13,
+                "filter": [
+                    "all",
+                    [
+                        "match",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        [
+                            "major_rail",
+                            "minor_rail"
+                        ],
+                        true,
+                        false
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        [
+                            "none",
+                            "ford"
+                        ],
+                        true,
+                        false
+                    ]
+                ],
+                "paint": {
+                    "line-color": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        13,
+                        "rgb(168, 62, 115)",
+                        17,
+                        "rgb(158, 56, 107)"
+                    ],
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        14,
+                        0.5,
+                        20,
+                        1
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "transit",
+                    "mapbox:group": "Transit, surface"
+                }
+            },
+            {
+                "id": "road-rail-tracks",
+                "type": "line",
+                "source": "composite",
+                "source-layer": "road",
+                "minzoom": 13,
+                "filter": [
+                    "all",
+                    [
+                        "match",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        [
+                            "major_rail",
+                            "minor_rail"
+                        ],
+                        true,
+                        false
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        [
+                            "none",
+                            "ford"
+                        ],
+                        true,
+                        false
+                    ]
+                ],
+                "paint": {
+                    "line-color": "rgb(158, 56, 107)",
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        14,
+                        4,
+                        20,
+                        8
+                    ],
+                    "line-dasharray": [
+                        0.1,
+                        15
+                    ],
+                    "line-opacity": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        13.75,
+                        0,
+                        14,
+                        1
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "transit",
+                    "mapbox:group": "Transit, surface"
+                }
+            },
+            {
+                "minzoom": 14,
+                "layout": {
+                    "line-cap": "round"
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "walking-cycling",
+                    "mapbox:group": "Walking, cycling, etc., barriers-bridges"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        "bridge"
+                    ],
+                    [
+                        "==",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        "path"
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "type"
+                        ],
+                        [
+                            "hiking",
+                            "mountain_bike",
+                            "trail"
+                        ],
+                        true,
+                        false
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "type": "line",
+                "source": "composite",
+                "id": "bridge-path-trail",
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        15,
+                        1,
+                        18,
+                        4
+                    ],
+                    "line-color": "rgb(202, 85, 143)",
+                    "line-dasharray": [
+                        10,
+                        0
+                    ]
+                },
+                "source-layer": "road"
+            },
+            {
+                "minzoom": 14,
+                "layout": {},
+                "metadata": {
+                    "mapbox:featureComponent": "walking-cycling",
+                    "mapbox:group": "Walking, cycling, etc., barriers-bridges"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        "bridge"
+                    ],
+                    [
+                        "==",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        "path"
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "type"
+                        ],
+                        [
+                            "cycleway",
+                            "piste"
+                        ],
+                        true,
+                        false
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "type": "line",
+                "source": "composite",
+                "id": "bridge-path-cycleway-piste",
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        15,
+                        1,
+                        18,
+                        4
+                    ],
+                    "line-color": "rgb(202, 85, 143)",
+                    "line-dasharray": [
+                        10,
+                        0
+                    ]
+                },
+                "source-layer": "road"
+            },
+            {
+                "minzoom": 14,
+                "layout": {
+                    "line-cap": "round"
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "walking-cycling",
+                    "mapbox:group": "Walking, cycling, etc., barriers-bridges"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        "bridge"
+                    ],
+                    [
+                        "==",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        "path"
+                    ],
+                    [
+                        "!=",
+                        [
+                            "get",
+                            "type"
+                        ],
+                        "steps"
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "type": "line",
+                "source": "composite",
+                "id": "bridge-path",
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        15,
+                        1,
+                        18,
+                        4
+                    ],
+                    "line-color": "rgb(202, 85, 143)",
+                    "line-dasharray": [
+                        10,
+                        0
+                    ]
+                },
+                "source-layer": "road"
+            },
+            {
+                "id": "bridge-steps",
+                "type": "line",
+                "source": "composite",
+                "source-layer": "road",
+                "minzoom": 14,
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "type"
+                        ],
+                        "steps"
+                    ],
+                    [
+                        "==",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        "bridge"
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        15,
+                        1,
+                        16,
+                        1.6,
+                        18,
+                        6
+                    ],
+                    "line-color": "rgb(202, 85, 143)",
+                    "line-dasharray": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        [
+                            "literal",
+                            [
+                                1,
+                                0
+                            ]
+                        ],
+                        15,
+                        [
+                            "literal",
+                            [
+                                1.75,
+                                1
+                            ]
+                        ],
+                        16,
+                        [
+                            "literal",
+                            [
+                                1,
+                                0.75
+                            ]
+                        ],
+                        17,
+                        [
+                            "literal",
+                            [
+                                0.3,
+                                0.3
+                            ]
+                        ]
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "walking-cycling",
+                    "mapbox:group": "Walking, cycling, etc., barriers-bridges"
+                }
+            },
+            {
+                "id": "bridge-pedestrian",
+                "type": "line",
+                "source": "composite",
+                "source-layer": "road",
+                "minzoom": 13,
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        "bridge"
+                    ],
+                    [
+                        "==",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        "pedestrian"
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        14,
+                        0.5,
+                        18,
+                        12
+                    ],
+                    "line-color": "rgb(202, 85, 143)",
+                    "line-dasharray": [
+                        10,
+                        0
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "walking-cycling",
+                    "mapbox:group": "Walking, cycling, etc., barriers-bridges"
+                }
+            },
+            {
+                "id": "bridge-case-simple",
+                "type": "line",
+                "source": "composite",
+                "source-layer": "road",
+                "minzoom": 13,
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        "bridge"
+                    ],
+                    [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "motorway_link",
+                                "trunk",
+                                "trunk_link",
+                                "primary",
+                                "secondary",
+                                "tertiary",
+                                "street",
+                                "street_limited",
+                                "primary_link",
+                                "track"
+                            ],
+                            true,
+                            false
+                        ],
+                        14,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "motorway_link",
+                                "trunk",
+                                "trunk_link",
+                                "primary",
+                                "primary_link",
+                                "secondary",
+                                "secondary_link",
+                                "tertiary",
+                                "tertiary_link",
+                                "street",
+                                "street_limited",
+                                "service",
+                                "track"
+                            ],
+                            true,
+                            false
+                        ]
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        13,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "trunk",
+                                "primary"
+                            ],
+                            3.5999999999999996,
+                            [
+                                "secondary",
+                                "tertiary"
+                            ],
+                            2.4,
+                            [
+                                "motorway_link",
+                                "trunk_link",
+                                "street",
+                                "street_limited",
+                                "primary_link"
+                            ],
+                            1.5,
+                            0.75
+                        ],
+                        18,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "trunk",
+                                "primary"
+                            ],
+                            21.599999999999998,
+                            [
+                                "secondary",
+                                "tertiary"
+                            ],
+                            18,
+                            [
+                                "motorway_link",
+                                "trunk_link",
+                                "street",
+                                "street_limited",
+                                "primary_link"
+                            ],
+                            13.2,
+                            9.6
+                        ],
+                        22,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "trunk",
+                                "primary"
+                            ],
+                            216,
+                            [
+                                "secondary",
+                                "tertiary"
+                            ],
+                            180,
+                            [
+                                "motorway_link",
+                                "trunk_link",
+                                "primary_link",
+                                "street",
+                                "street_limited"
+                            ],
+                            132,
+                            96
+                        ]
+                    ],
+                    "line-color": "rgb(186, 58, 122)"
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "road-network",
+                    "mapbox:group": "Road network, bridges"
+                }
+            },
+            {
+                "minzoom": 13,
+                "layout": {
+                    "line-cap": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        "butt",
+                        14,
+                        "round"
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "road-network",
+                    "mapbox:group": "Road network, bridges"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        "bridge"
+                    ],
+                    [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "trunk"
+                            ],
+                            true,
+                            false
+                        ],
+                        13,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "motorway_link",
+                                "trunk",
+                                "trunk_link",
+                                "primary",
+                                "secondary",
+                                "tertiary",
+                                "street",
+                                "street_limited",
+                                "primary_link",
+                                "track"
+                            ],
+                            true,
+                            false
+                        ],
+                        14,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "motorway_link",
+                                "trunk",
+                                "trunk_link",
+                                "primary",
+                                "primary_link",
+                                "secondary",
+                                "secondary_link",
+                                "tertiary",
+                                "tertiary_link",
+                                "street",
+                                "street_limited",
+                                "service",
+                                "track"
+                            ],
+                            true,
+                            false
+                        ]
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "type": "line",
+                "source": "composite",
+                "id": "bridge-simple",
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        13,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "trunk",
+                                "primary"
+                            ],
+                            2.4,
+                            [
+                                "secondary",
+                                "tertiary"
+                            ],
+                            1.5,
+                            [
+                                "motorway_link",
+                                "trunk_link",
+                                "street",
+                                "street_limited",
+                                "primary_link"
+                            ],
+                            0.6,
+                            0.5
+                        ],
+                        18,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "trunk",
+                                "primary"
+                            ],
+                            19.2,
+                            [
+                                "secondary",
+                                "tertiary"
+                            ],
+                            15.6,
+                            [
+                                "motorway_link",
+                                "trunk_link",
+                                "street",
+                                "street_limited",
+                                "primary_link"
+                            ],
+                            10.799999999999999,
+                            7.199999999999999
+                        ],
+                        22,
+                        [
+                            "match",
+                            [
+                                "get",
+                                "class"
+                            ],
+                            [
+                                "motorway",
+                                "trunk",
+                                "primary"
+                            ],
+                            192,
+                            [
+                                "secondary",
+                                "tertiary"
+                            ],
+                            156,
+                            [
+                                "motorway_link",
+                                "trunk_link",
+                                "primary_link",
+                                "street",
+                                "street_limited"
+                            ],
+                            108,
+                            72
+                        ]
+                    ],
+                    "line-color": "rgb(202, 85, 143)"
+                },
+                "source-layer": "road"
+            },
+            {
+                "id": "bridge-rail",
+                "type": "line",
+                "source": "composite",
+                "source-layer": "road",
+                "minzoom": 13,
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        "bridge"
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        [
+                            "major_rail",
+                            "minor_rail"
+                        ],
+                        true,
+                        false
+                    ]
+                ],
+                "paint": {
+                    "line-color": "rgb(158, 56, 107)",
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        14,
+                        0.5,
+                        20,
+                        1
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "transit",
+                    "mapbox:group": "Transit, bridges"
+                }
+            },
+            {
+                "id": "bridge-rail-tracks",
+                "type": "line",
+                "source": "composite",
+                "source-layer": "road",
+                "minzoom": 13,
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "structure"
+                        ],
+                        "bridge"
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        [
+                            "major_rail",
+                            "minor_rail"
+                        ],
+                        true,
+                        false
+                    ]
+                ],
+                "paint": {
+                    "line-color": "rgb(158, 56, 107)",
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "exponential",
+                            1.5
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        14,
+                        4,
+                        20,
+                        8
+                    ],
+                    "line-dasharray": [
+                        0.1,
+                        15
+                    ],
+                    "line-opacity": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        13.75,
+                        0,
+                        14,
+                        1
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "transit",
+                    "mapbox:group": "Transit, bridges"
+                }
+            },
+            {
+                "minzoom": 15,
+                "layout": {},
+                "metadata": {
+                    "mapbox:featureComponent": "buildings",
+                    "mapbox:group": "Buildings, extruded"
+                },
+                "filter": [
+                    "==",
+                    [
+                        "get",
+                        "extrude"
+                    ],
+                    "true"
+                ],
+                "type": "fill-extrusion",
+                "source": "composite",
+                "id": "building-extrusion",
+                "paint": {
+                    "fill-extrusion-color": "rgb(165, 51, 108)",
+                    "fill-extrusion-height": [
+                        "get",
+                        "height"
+                    ],
+                    "fill-extrusion-base": [
+                        "get",
+                        "min_height"
+                    ],
+                    "fill-extrusion-opacity": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        15,
+                        0,
+                        16,
+                        0.5
+                    ]
+                },
+                "source-layer": "building"
+            },
+            {
+                "id": "admin-1-boundary-bg",
+                "type": "line",
+                "source": "composite",
+                "source-layer": "admin",
+                "minzoom": 7,
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "admin_level"
+                        ],
+                        1
+                    ],
+                    [
+                        "==",
+                        [
+                            "get",
+                            "maritime"
+                        ],
+                        "false"
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "worldview"
+                        ],
+                        [
+                            "all",
+                            "US"
+                        ],
+                        true,
+                        false
+                    ]
+                ],
+                "paint": {
+                    "line-color": "rgb(158, 56, 107)",
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        3,
+                        3,
+                        12,
+                        6
+                    ],
+                    "line-opacity": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        7,
+                        0,
+                        8,
+                        0.5
+                    ],
+                    "line-dasharray": [
+                        1,
+                        0
+                    ],
+                    "line-blur": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        3,
+                        0,
+                        12,
+                        3
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "admin-boundaries",
+                    "mapbox:group": "Administrative boundaries, admin"
+                }
+            },
+            {
+                "id": "admin-0-boundary-bg",
+                "type": "line",
+                "source": "composite",
+                "source-layer": "admin",
+                "minzoom": 1,
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "admin_level"
+                        ],
+                        0
+                    ],
+                    [
+                        "==",
+                        [
+                            "get",
+                            "maritime"
+                        ],
+                        "false"
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "worldview"
+                        ],
+                        [
+                            "all",
+                            "US"
+                        ],
+                        true,
+                        false
+                    ]
+                ],
+                "paint": {
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        3,
+                        5.2,
+                        12,
+                        10.4
+                    ],
+                    "line-color": "rgb(158, 56, 107)",
+                    "line-opacity": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        3,
+                        0,
+                        4,
+                        0.5
+                    ],
+                    "line-blur": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        3,
+                        0,
+                        12,
+                        2.6
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "admin-boundaries",
+                    "mapbox:group": "Administrative boundaries, admin"
+                }
+            },
+            {
+                "minzoom": 2,
+                "layout": {},
+                "metadata": {
+                    "mapbox:featureComponent": "admin-boundaries",
+                    "mapbox:group": "Administrative boundaries, admin"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "admin_level"
+                        ],
+                        1
+                    ],
+                    [
+                        "==",
+                        [
+                            "get",
+                            "maritime"
+                        ],
+                        "false"
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "worldview"
+                        ],
+                        [
+                            "all",
+                            "US"
+                        ],
+                        true,
+                        false
+                    ]
+                ],
+                "type": "line",
+                "source": "composite",
+                "id": "admin-1-boundary",
+                "paint": {
+                    "line-dasharray": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        [
+                            "literal",
+                            [
+                                2,
+                                0
+                            ]
+                        ],
+                        7,
+                        [
+                            "literal",
+                            [
+                                2,
+                                2,
+                                6,
+                                2
+                            ]
+                        ]
+                    ],
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        3,
+                        0.3,
+                        12,
+                        1.5
+                    ],
+                    "line-opacity": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        2,
+                        0,
+                        3,
+                        1
+                    ],
+                    "line-color": "rgb(220, 143, 181)"
+                },
+                "source-layer": "admin"
+            },
+            {
+                "minzoom": 1,
+                "layout": {},
+                "metadata": {
+                    "mapbox:featureComponent": "admin-boundaries",
+                    "mapbox:group": "Administrative boundaries, admin"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "admin_level"
+                        ],
+                        0
+                    ],
+                    [
+                        "==",
+                        [
+                            "get",
+                            "disputed"
+                        ],
+                        "false"
+                    ],
+                    [
+                        "==",
+                        [
+                            "get",
+                            "maritime"
+                        ],
+                        "false"
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "worldview"
+                        ],
+                        [
+                            "all",
+                            "US"
+                        ],
+                        true,
+                        false
+                    ]
+                ],
+                "type": "line",
+                "source": "composite",
+                "id": "admin-0-boundary",
+                "paint": {
+                    "line-color": "rgb(217, 146, 182)",
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        3,
+                        0.65,
+                        12,
+                        2.6
+                    ],
+                    "line-dasharray": [
+                        10,
+                        0
+                    ]
+                },
+                "source-layer": "admin"
+            },
+            {
+                "id": "admin-0-boundary-disputed",
+                "type": "line",
+                "source": "composite",
+                "source-layer": "admin",
+                "minzoom": 1,
+                "filter": [
+                    "all",
+                    [
+                        "==",
+                        [
+                            "get",
+                            "disputed"
+                        ],
+                        "true"
+                    ],
+                    [
+                        "==",
+                        [
+                            "get",
+                            "admin_level"
+                        ],
+                        0
+                    ],
+                    [
+                        "==",
+                        [
+                            "get",
+                            "maritime"
+                        ],
+                        "false"
+                    ],
+                    [
+                        "match",
+                        [
+                            "get",
+                            "worldview"
+                        ],
+                        [
+                            "all",
+                            "US"
+                        ],
+                        true,
+                        false
+                    ]
+                ],
+                "paint": {
+                    "line-color": "rgb(217, 146, 182)",
+                    "line-width": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        3,
+                        0.65,
+                        12,
+                        2.6
+                    ],
+                    "line-dasharray": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        [
+                            "literal",
+                            [
+                                3,
+                                2,
+                                5
+                            ]
+                        ],
+                        7,
+                        [
+                            "literal",
+                            [
+                                2,
+                                1.5
+                            ]
+                        ]
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "admin-boundaries",
+                    "mapbox:group": "Administrative boundaries, admin"
+                }
+            },
+            {
+                "minzoom": 13,
+                "layout": {
+                    "text-font": [
+                        "DIN Pro Italic",
+                        "Arial Unicode MS Regular"
+                    ],
+                    "text-max-angle": 30,
+                    "symbol-spacing": [
+                        "interpolate",
+                        [
+                            "linear",
+                            1
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        15,
+                        250,
+                        17,
+                        400
+                    ],
+                    "text-size": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        13,
+                        12,
+                        18,
+                        18
+                    ],
+                    "symbol-placement": "line",
+                    "text-pitch-alignment": "viewport",
+                    "text-field": [
+                        "coalesce",
+                        [
+                            "get",
+                            "name_en"
+                        ],
+                        [
+                            "get",
+                            "name"
+                        ]
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "natural-features",
+                    "mapbox:group": "Natural features, natural-labels"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "match",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        [
+                            "canal",
+                            "river",
+                            "stream",
+                            "disputed_canal",
+                            "disputed_river",
+                            "disputed_stream"
+                        ],
+                        [
+                            "match",
+                            [
+                                "get",
+                                "worldview"
+                            ],
+                            [
+                                "all",
+                                "US"
+                            ],
+                            true,
+                            false
+                        ],
+                        false
+                    ],
+                    [
+                        "step",
+                        [
+                            "pitch"
+                        ],
+                        true,
+                        50,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            1
+                        ],
+                        60,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            1.5
+                        ],
+                        70,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            2
+                        ]
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "type": "symbol",
+                "source": "composite",
+                "id": "waterway-label",
+                "paint": {
+                    "text-color": "rgb(215, 131, 173)",
+                    "text-halo-color": "rgba(154, 49, 102, 0.5)"
+                },
+                "source-layer": "natural_label"
+            },
+            {
+                "minzoom": 4,
+                "layout": {
+                    "text-size": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        [
+                            "step",
+                            [
+                                "get",
+                                "sizerank"
+                            ],
+                            18,
+                            5,
+                            12
+                        ],
+                        17,
+                        [
+                            "step",
+                            [
+                                "get",
+                                "sizerank"
+                            ],
+                            18,
+                            13,
+                            12
+                        ]
+                    ],
+                    "text-max-angle": 30,
+                    "text-field": [
+                        "coalesce",
+                        [
+                            "get",
+                            "name_en"
+                        ],
+                        [
+                            "get",
+                            "name"
+                        ]
+                    ],
+                    "text-font": [
+                        "DIN Pro Medium",
+                        "Arial Unicode MS Regular"
+                    ],
+                    "symbol-placement": "line-center",
+                    "text-pitch-alignment": "viewport"
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "natural-features",
+                    "mapbox:group": "Natural features, natural-labels"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "match",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        [
+                            "glacier",
+                            "landform",
+                            "disputed_glacier",
+                            "disputed_landform"
+                        ],
+                        [
+                            "match",
+                            [
+                                "get",
+                                "worldview"
+                            ],
+                            [
+                                "all",
+                                "US"
+                            ],
+                            true,
+                            false
+                        ],
+                        false
+                    ],
+                    [
+                        "<=",
+                        [
+                            "get",
+                            "filterrank"
+                        ],
+                        1
+                    ],
+                    [
+                        "step",
+                        [
+                            "pitch"
+                        ],
+                        true,
+                        50,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            1
+                        ],
+                        60,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            1.5
+                        ],
+                        70,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            2
+                        ]
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "type": "symbol",
+                "source": "composite",
+                "id": "natural-line-label",
+                "paint": {
+                    "text-halo-width": 0.5,
+                    "text-halo-color": "rgb(154, 49, 102)",
+                    "text-halo-blur": 0.5,
+                    "text-color": "rgb(238, 201, 220)"
+                },
+                "source-layer": "natural_label"
+            },
+            {
+                "minzoom": 4,
+                "layout": {
+                    "text-size": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        [
+                            "step",
+                            [
+                                "get",
+                                "sizerank"
+                            ],
+                            18,
+                            5,
+                            12
+                        ],
+                        17,
+                        [
+                            "step",
+                            [
+                                "get",
+                                "sizerank"
+                            ],
+                            18,
+                            13,
+                            12
+                        ]
+                    ],
+                    "icon-image": [
+                        "case",
+                        [
+                            "has",
+                            "maki_beta"
+                        ],
+                        [
+                            "coalesce",
+                            [
+                                "image",
+                                [
+                                    "get",
+                                    "maki_beta"
+                                ]
+                            ],
+                            [
+                                "image",
+                                [
+                                    "get",
+                                    "maki"
+                                ]
+                            ]
+                        ],
+                        [
+                            "image",
+                            [
+                                "get",
+                                "maki"
+                            ]
+                        ]
+                    ],
+                    "text-font": [
+                        "DIN Pro Medium",
+                        "Arial Unicode MS Regular"
+                    ],
+                    "text-offset": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        [
+                            "step",
+                            [
+                                "get",
+                                "sizerank"
+                            ],
+                            [
+                                "literal",
+                                [
+                                    0,
+                                    0
+                                ]
+                            ],
+                            5,
+                            [
+                                "literal",
+                                [
+                                    0,
+                                    0.75
+                                ]
+                            ]
+                        ],
+                        17,
+                        [
+                            "step",
+                            [
+                                "get",
+                                "sizerank"
+                            ],
+                            [
+                                "literal",
+                                [
+                                    0,
+                                    0
+                                ]
+                            ],
+                            13,
+                            [
+                                "literal",
+                                [
+                                    0,
+                                    0.75
+                                ]
+                            ]
+                        ]
+                    ],
+                    "text-anchor": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        [
+                            "step",
+                            [
+                                "get",
+                                "sizerank"
+                            ],
+                            "center",
+                            5,
+                            "top"
+                        ],
+                        17,
+                        [
+                            "step",
+                            [
+                                "get",
+                                "sizerank"
+                            ],
+                            "center",
+                            13,
+                            "top"
+                        ]
+                    ],
+                    "text-field": [
+                        "coalesce",
+                        [
+                            "get",
+                            "name_en"
+                        ],
+                        [
+                            "get",
+                            "name"
+                        ]
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "natural-features",
+                    "mapbox:group": "Natural features, natural-labels"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "match",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        [
+                            "dock",
+                            "glacier",
+                            "landform",
+                            "water_feature",
+                            "wetland",
+                            "disputed_dock",
+                            "disputed_glacier",
+                            "disputed_landform",
+                            "disputed_water_feature",
+                            "disputed_wetland"
+                        ],
+                        [
+                            "match",
+                            [
+                                "get",
+                                "worldview"
+                            ],
+                            [
+                                "all",
+                                "US"
+                            ],
+                            true,
+                            false
+                        ],
+                        false
+                    ],
+                    [
+                        "<=",
+                        [
+                            "get",
+                            "filterrank"
+                        ],
+                        1
+                    ],
+                    [
+                        "step",
+                        [
+                            "pitch"
+                        ],
+                        true,
+                        50,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            1
+                        ],
+                        60,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            1.5
+                        ],
+                        70,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            2
+                        ]
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "Point"
+                    ]
+                ],
+                "type": "symbol",
+                "source": "composite",
+                "id": "natural-point-label",
+                "paint": {
+                    "icon-opacity": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        [
+                            "step",
+                            [
+                                "get",
+                                "sizerank"
+                            ],
+                            0,
+                            5,
+                            1
+                        ],
+                        17,
+                        [
+                            "step",
+                            [
+                                "get",
+                                "sizerank"
+                            ],
+                            0,
+                            13,
+                            1
+                        ]
+                    ],
+                    "text-halo-color": "rgb(154, 49, 102)",
+                    "text-halo-width": 0.5,
+                    "text-halo-blur": 0.5,
+                    "text-color": "rgb(238, 201, 220)"
+                },
+                "source-layer": "natural_label"
+            },
+            {
+                "minzoom": 1,
+                "layout": {
+                    "text-size": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        0,
+                        [
+                            "*",
+                            [
+                                "-",
+                                16,
+                                [
+                                    "sqrt",
+                                    [
+                                        "get",
+                                        "sizerank"
+                                    ]
+                                ]
+                            ],
+                            1
+                        ],
+                        22,
+                        [
+                            "*",
+                            [
+                                "-",
+                                22,
+                                [
+                                    "sqrt",
+                                    [
+                                        "get",
+                                        "sizerank"
+                                    ]
+                                ]
+                            ],
+                            1
+                        ]
+                    ],
+                    "text-max-angle": 30,
+                    "text-letter-spacing": [
+                        "match",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        "ocean",
+                        0.25,
+                        [
+                            "sea",
+                            "bay"
+                        ],
+                        0.15,
+                        0
+                    ],
+                    "text-font": [
+                        "DIN Pro Italic",
+                        "Arial Unicode MS Regular"
+                    ],
+                    "symbol-placement": "line-center",
+                    "text-pitch-alignment": "viewport",
+                    "text-field": [
+                        "coalesce",
+                        [
+                            "get",
+                            "name_en"
+                        ],
+                        [
+                            "get",
+                            "name"
+                        ]
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "natural-features",
+                    "mapbox:group": "Natural features, natural-labels"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "match",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        [
+                            "bay",
+                            "ocean",
+                            "reservoir",
+                            "sea",
+                            "water",
+                            "disputed_bay",
+                            "disputed_ocean",
+                            "disputed_reservoir",
+                            "disputed_sea",
+                            "disputed_water"
+                        ],
+                        [
+                            "match",
+                            [
+                                "get",
+                                "worldview"
+                            ],
+                            [
+                                "all",
+                                "US"
+                            ],
+                            true,
+                            false
+                        ],
+                        false
+                    ],
+                    [
+                        "step",
+                        [
+                            "pitch"
+                        ],
+                        true,
+                        50,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            1
+                        ],
+                        60,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            1.5
+                        ],
+                        70,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            2
+                        ]
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "LineString"
+                    ]
+                ],
+                "type": "symbol",
+                "source": "composite",
+                "id": "water-line-label",
+                "paint": {
+                    "text-color": "rgb(215, 131, 173)",
+                    "text-halo-color": "rgba(154, 49, 102, 0.5)"
+                },
+                "source-layer": "natural_label"
+            },
+            {
+                "minzoom": 1,
+                "layout": {
+                    "text-line-height": 1.3,
+                    "text-size": [
+                        "interpolate",
+                        [
+                            "linear"
+                        ],
+                        [
+                            "zoom"
+                        ],
+                        0,
+                        [
+                            "*",
+                            [
+                                "-",
+                                16,
+                                [
+                                    "sqrt",
+                                    [
+                                        "get",
+                                        "sizerank"
+                                    ]
+                                ]
+                            ],
+                            1
+                        ],
+                        22,
+                        [
+                            "*",
+                            [
+                                "-",
+                                22,
+                                [
+                                    "sqrt",
+                                    [
+                                        "get",
+                                        "sizerank"
+                                    ]
+                                ]
+                            ],
+                            1
+                        ]
+                    ],
+                    "text-font": [
+                        "DIN Pro Italic",
+                        "Arial Unicode MS Regular"
+                    ],
+                    "text-field": [
+                        "coalesce",
+                        [
+                            "get",
+                            "name_en"
+                        ],
+                        [
+                            "get",
+                            "name"
+                        ]
+                    ],
+                    "text-letter-spacing": [
+                        "match",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        "ocean",
+                        0.25,
+                        [
+                            "bay",
+                            "sea"
+                        ],
+                        0.15,
+                        0.01
+                    ],
+                    "text-max-width": [
+                        "match",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        "ocean",
+                        4,
+                        "sea",
+                        5,
+                        [
+                            "bay",
+                            "water"
+                        ],
+                        7,
+                        10
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "natural-features",
+                    "mapbox:group": "Natural features, natural-labels"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "match",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        [
+                            "bay",
+                            "ocean",
+                            "reservoir",
+                            "sea",
+                            "water",
+                            "disputed_bay",
+                            "disputed_ocean",
+                            "disputed_reservoir",
+                            "disputed_sea",
+                            "disputed_water"
+                        ],
+                        [
+                            "match",
+                            [
+                                "get",
+                                "worldview"
+                            ],
+                            [
+                                "all",
+                                "US"
+                            ],
+                            true,
+                            false
+                        ],
+                        false
+                    ],
+                    [
+                        "step",
+                        [
+                            "pitch"
+                        ],
+                        true,
+                        50,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            1
+                        ],
+                        60,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            1.5
+                        ],
+                        70,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            2
+                        ]
+                    ],
+                    [
+                        "==",
+                        [
+                            "geometry-type"
+                        ],
+                        "Point"
+                    ]
+                ],
+                "type": "symbol",
+                "source": "composite",
+                "id": "water-point-label",
+                "paint": {
+                    "text-color": "rgb(215, 131, 173)",
+                    "text-halo-color": "rgba(154, 49, 102, 0.5)"
+                },
+                "source-layer": "natural_label"
+            },
+            {
+                "minzoom": 6,
+                "layout": {
+                    "text-size": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        [
+                            "step",
+                            [
+                                "get",
+                                "sizerank"
+                            ],
+                            18,
+                            5,
+                            12
+                        ],
+                        17,
+                        [
+                            "step",
+                            [
+                                "get",
+                                "sizerank"
+                            ],
+                            18,
+                            13,
+                            12
+                        ]
+                    ],
+                    "icon-image": "",
+                    "text-font": [
+                        "DIN Pro Italic",
+                        "Arial Unicode MS Regular"
+                    ],
+                    "text-offset": [
+                        0,
+                        0
+                    ],
+                    "text-anchor": [
+                        "step",
+                        [
+                            "zoom"
+                        ],
+                        [
+                            "step",
+                            [
+                                "get",
+                                "sizerank"
+                            ],
+                            "center",
+                            5,
+                            "top"
+                        ],
+                        17,
+                        [
+                            "step",
+                            [
+                                "get",
+                                "sizerank"
+                            ],
+                            "center",
+                            13,
+                            "top"
+                        ]
+                    ],
+                    "text-field": [
+                        "coalesce",
+                        [
+                            "get",
+                            "name_en"
+                        ],
+                        [
+                            "get",
+                            "name"
+                        ]
+                    ]
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "point-of-interest-labels",
+                    "mapbox:group": "Point of interest labels, poi-labels"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "<=",
+                        [
+                            "get",
+                            "filterrank"
+                        ],
+                        [
+                            "+",
+                            [
+                                "step",
+                                [
+                                    "zoom"
+                                ],
+                                0,
+                                16,
+                                1,
+                                17,
+                                2
+                            ],
+                            1
+                        ]
+                    ],
+                    [
+                        "step",
+                        [
+                            "pitch"
+                        ],
+                        true,
+                        50,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            2
+                        ],
+                        60,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            2.5
+                        ],
+                        70,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            3
+                        ]
+                    ]
+                ],
+                "type": "symbol",
+                "source": "composite",
+                "id": "poi-label",
+                "paint": {
+                    "text-halo-color": "rgb(154, 49, 102)",
+                    "text-halo-width": 0.5,
+                    "text-halo-blur": 0.5,
+                    "text-color": "rgb(246, 225, 235)"
+                },
+                "source-layer": "poi_label"
+            },
+            {
+                "minzoom": 8,
+                "layout": {
+                    "text-line-height": 1.1,
+                    "text-size": [
+                        "step",
+                        [
+                            "get",
+                            "sizerank"
+                        ],
+                        18,
+                        9,
+                        12
+                    ],
+                    "icon-image": "",
+                    "text-font": [
+                        "DIN Pro Medium",
+                        "Arial Unicode MS Regular"
+                    ],
+                    "text-offset": [
+                        0,
+                        0
+                    ],
+                    "text-rotation-alignment": "viewport",
+                    "text-anchor": "top",
+                    "text-field": [
+                        "step",
+                        [
+                            "get",
+                            "sizerank"
+                        ],
+                        [
+                            "case",
+                            [
+                                "has",
+                                "ref"
+                            ],
+                            [
+                                "concat",
+                                [
+                                    "get",
+                                    "ref"
+                                ],
+                                " -\n",
+                                [
+                                    "coalesce",
+                                    [
+                                        "get",
+                                        "name_en"
+                                    ],
+                                    [
+                                        "get",
+                                        "name"
+                                    ]
+                                ]
+                            ],
+                            [
+                                "coalesce",
+                                [
+                                    "get",
+                                    "name_en"
+                                ],
+                                [
+                                    "get",
+                                    "name"
+                                ]
+                            ]
+                        ],
+                        15,
+                        [
+                            "get",
+                            "ref"
+                        ]
+                    ],
+                    "text-letter-spacing": 0.01,
+                    "text-max-width": 9
+                },
+                "metadata": {
+                    "mapbox:featureComponent": "transit",
+                    "mapbox:group": "Transit, transit-labels"
+                },
+                "filter": [
+                    "all",
+                    [
+                        "match",
+                        [
+                            "get",
+                            "class"
+                        ],
+                        [
+                            "military",
+                            "civil",
+                            "disputed_military",
+                            "disputed_civil"
+                        ],
+                        [
+                            "match",
+                            [
+                                "get",
+                                "worldview"
+                            ],
+                            [
+                                "all",
+                                "US"
+                            ],
+                            true,
+                            false
+                        ],
+                        false
+                    ],
+                    [
+                        "step",
+                        [
+                            "pitch"
+                        ],
+                        true,
+                        50,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            3
+                        ],
+                        60,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            4
+                        ],
+                        70,
+                        [
+                            "<",
+                            [
+                                "distance-from-center"
+                            ],
+                            5
+                        ]
+                    ]
+                ],
+                "type": "symbol",
+                "source": "composite",
+                "id": "airport-label",
+                "paint": {
+                    "text-color": "rgb(254, 252, 253)",
+                    "text-halo-color": "rgb(154, 49, 102)",
+                    "text-halo-width": 1
+                },
+                "source-layer": "airport_label"
+            }
+        ],
+        "created": "2024-12-31T17:21:07.087Z",
+        "modified": "2024-12-31T17:24:36.147Z",
+        "id": "cm5cqivwv00eb01saf9t60mjs",
+        "owner": "aminmajid3",
+        "visibility": "private",
+        "protected": false,
+        "draft": false
+    }

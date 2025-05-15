@@ -1,77 +1,80 @@
-import { useState } from "react";
-import LocationList from "./LocationList.jsx";
-import Map from "./Map.jsx";
+import React, { useState } from "react";
+import Map from "./Map"; // import your Map component
 import "./styles.css";
 
 export default function App() {
-  const [locations, setLocations] = useState([]);
-  const [theme, setTheme] = useState("ocean");
-  const [layout, setLayout] = useState("portrait");
+  const [locations, setLocations] = useState("");
   const [title, setTitle] = useState("Honeymoon");
-  const [subtitle, setSubtitle] = useState("Julie & Alex");
-
-  const handleThemeChange = (newTheme) => {
-    setTheme(newTheme);
-  };
-
-  const toggleLayout = () => {
-    setLayout(prev => prev === "portrait" ? "landscape" : "portrait");
-  };
+  const [description, setDescription] = useState("Julie & Alex");
 
   return (
-    <div className="container">
-      <div className="sidebar">
+    <div className="app-container">
+      {/* Left panel */}
+      <div className="left-panel">
         <h1>Create your travel map</h1>
 
-        <div className="step">
-          <h2>1. Add your locations</h2>
-          <LocationList locations={locations} setLocations={setLocations} />
-        </div>
+        <section>
+          <h3>1. Add your locations</h3>
+          <p>
+            Use the search bar to add your destinations. Drag and move the
+            locations using the three-line icon.
+          </p>
+          <input
+            type="text"
+            placeholder="Add your locations"
+            value={locations}
+            onChange={(e) => setLocations(e.target.value)}
+            className="input-box"
+          />
+        </section>
 
-        <div className="step">
-          <h2>2. Choose your Map Style</h2>
-          <div className="theme-buttons">
-            <button onClick={() => handleThemeChange('ocean')}></button>
-            <button onClick={() => handleThemeChange('sunset')}></button>
-            <button onClick={() => handleThemeChange('mint')}></button>
-            <button onClick={() => handleThemeChange('desert')}></button>
-            <button onClick={() => handleThemeChange('violet')}></button>
+        <section>
+          <h3>2. Choose your Map Style</h3>
+          <p>
+            Select your preferred map style from the options listed below. Tip:
+            If you do not see the map lines, try adding the locations again.
+          </p>
+          <div className="color-options">
+            <div className="color-dot selected" style={{ backgroundColor: "#d1e8ff" }} />
+            <div className="color-dot" style={{ backgroundColor: "#a0d8ef" }} />
+            <div className="color-dot" style={{ backgroundColor: "#8ac6b1" }} />
+            <div className="color-dot" style={{ backgroundColor: "#e5a75f" }} />
+            <div className="color-dot" style={{ backgroundColor: "#b75072" }} />
+            <div className="color-dot" style={{ backgroundColor: "#b0a1d8" }} />
+            <div className="color-dot" style={{ backgroundColor: "#5a3974" }} />
+            <div className="color-dot" style={{ backgroundColor: "#003540" }} />
+            <div className="color-dot" style={{ backgroundColor: "#a8c59a" }} />
           </div>
-        </div>
+        </section>
 
-        <div className="step">
-          <h2>3. Name your journey</h2>
-          <input 
-            type="text" 
-            placeholder="Name your journey" 
+        <section>
+          <h3>3. Name your journey</h3>
+          <p>Give a memorable title & description in the text fields to personalize your map</p>
+          <input
+            type="text"
+            placeholder="Name your journey"
             value={title}
-            onChange={(e) => setTitle(e.target.value || 'Honeymoon')}
+            onChange={(e) => setTitle(e.target.value)}
+            className="input-box"
           />
-          <input 
-            type="text" 
-            placeholder="Add description" 
-            value={subtitle}
-            onChange={(e) => setSubtitle(e.target.value || 'Julie & Alex')}
+          <input
+            type="text"
+            placeholder="Add description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="input-box"
           />
-        </div>
-
-        <div className="step">
-          <h2>4. Choose map orientation</h2>
-          <button onClick={toggleLayout}>
-            Switch to {layout === "portrait" ? "landscape" : "portrait"}
-          </button>
-        </div>
-
-        <button className="download-btn">Download HD Printable Map</button>
+        </section>
       </div>
 
-      <div id="poster" className={`poster ${layout} ${theme} rectangle`}>
-        <div className="map-container">
+      {/* Right panel */}
+      <div className="right-panel">
+        <div className="map-frame">
           <Map locations={locations} />
-        </div>
-        <div className="details">
-          <h1 id="place-title">{title}</h1>
-          <h2 id="place-subtitle">{subtitle}</h2>
+          <div className="map-labels">
+            <h2>{title}</h2>
+            <p>{description}</p>
+          </div>
         </div>
       </div>
     </div>
