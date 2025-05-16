@@ -1,11 +1,33 @@
-import React, { useState } from "react";
-import Map from "./Map"; // import your Map component
+import React, { useState, useRef } from "react";
+import Map from "./Map";
+import LocationList from "./LocationList";
+import customStyles from "./mapbox_styles/style.json";
+import domtoimage from "dom-to-image-more";
+import 'mapbox-gl/dist/mapbox-gl.css';
 import "./styles.css";
 
 export default function App() {
-  const [locations, setLocations] = useState("");
+  const [locations, setLocations] = useState([]);
   const [title, setTitle] = useState("Honeymoon");
   const [description, setDescription] = useState("Julie & Alex");
+  const [selectedStyleKey, setSelectedStyleKey] = useState(Object.keys(customStyles)[0]); // default first
+
+  const mapRef = useRef(null); // NEW: reference to map frame
+
+  const handleDownload = () => {
+    if (mapRef.current) {
+      domtoimage.toPng(mapRef.current, { cacheBust: true })
+        .then((dataUrl) => {
+          const link = document.createElement("a");
+          link.download = "travel-map.png";
+          link.href = dataUrl;
+          link.click();
+        })
+        .catch((error) => {
+          console.error("Could not generate image", error);
+        });
+    }
+  };
 
   return (
     <div className="app-container">
@@ -19,31 +41,20 @@ export default function App() {
             Use the search bar to add your destinations. Drag and move the
             locations using the three-line icon.
           </p>
-          <input
-            type="text"
-            placeholder="Add your locations"
-            value={locations}
-            onChange={(e) => setLocations(e.target.value)}
-            className="input-box"
-          />
+          <LocationList locations={locations} setLocations={setLocations} />
         </section>
 
         <section>
           <h3>2. Choose your Map Style</h3>
-          <p>
-            Select your preferred map style from the options listed below. Tip:
-            If you do not see the map lines, try adding the locations again.
-          </p>
           <div className="color-options">
-            <div className="color-dot selected" style={{ backgroundColor: "#d1e8ff" }} />
-            <div className="color-dot" style={{ backgroundColor: "#a0d8ef" }} />
-            <div className="color-dot" style={{ backgroundColor: "#8ac6b1" }} />
-            <div className="color-dot" style={{ backgroundColor: "#e5a75f" }} />
-            <div className="color-dot" style={{ backgroundColor: "#b75072" }} />
-            <div className="color-dot" style={{ backgroundColor: "#b0a1d8" }} />
-            <div className="color-dot" style={{ backgroundColor: "#5a3974" }} />
-            <div className="color-dot" style={{ backgroundColor: "#003540" }} />
-            <div className="color-dot" style={{ backgroundColor: "#a8c59a" }} />
+            {Object.entries(customStyles).map(([key, style], idx) => (
+              <div
+                key={key}
+                className={`color-dot ${selectedStyleKey === key ? "selected" : ""}`}
+                style={{ backgroundColor: style.metadata?.color || "#ccc" }}
+                onClick={() => setSelectedStyleKey(key)}
+              />
+            ))}
           </div>
         </section>
 
@@ -65,12 +76,17 @@ export default function App() {
             className="input-box"
           />
         </section>
+
+        {/* Download button */}
+        <button onClick={handleDownload} className="download-button">
+          Download Map Poster
+        </button>
       </div>
 
       {/* Right panel */}
       <div className="right-panel">
-        <div className="map-frame">
-          <Map locations={locations} />
+        <div className="map-frame" ref={mapRef}>
+          <Map locations={locations} styleJSON={customStyles[selectedStyleKey]} />
           <div className="map-labels">
             <h2>{title}</h2>
             <p>{description}</p>

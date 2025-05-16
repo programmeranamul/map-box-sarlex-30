@@ -20,13 +20,20 @@ export default function LocationList({ locations, setLocations }) {
           name: data.features[0].place_name,
           coords: data.features[0].center,
         };
-        
         setLocations([...locations, newLocation]);
         setInput("");
       }
     } catch (error) {
       console.error("Error fetching location:", error);
     }
+  };
+
+  const moveItem = (fromIndex, toIndex) => {
+    if (toIndex < 0 || toIndex >= locations.length) return;
+    const updated = [...locations];
+    const [moved] = updated.splice(fromIndex, 1);
+    updated.splice(toIndex, 0, moved);
+    setLocations(updated);
   };
 
   return (
@@ -43,9 +50,16 @@ export default function LocationList({ locations, setLocations }) {
       </form>
       <ul className="location-list">
         {locations.map((loc, i) => (
-          <li key={i}>{loc.name}</li>
+          <li key={i} className="location-item">
+            {loc.name}
+            <div className="reorder-buttons">
+              <button onClick={() => moveItem(i, i - 1)} aria-label="Move up">↑</button>
+              <button onClick={() => moveItem(i, i + 1)} aria-label="Move down">↓</button>
+            </div>
+          </li>
         ))}
       </ul>
     </div>
   );
-} 
+}
+
