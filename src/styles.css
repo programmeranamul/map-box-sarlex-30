@@ -40,7 +40,6 @@ html, body, #root {
   margin: 0 0 8px;
   font-size: 1rem;
   font-weight: 700;
-  color: #1a2233;
 }
 .left-panel p {
   margin: 0 0 12px;
@@ -49,7 +48,7 @@ html, body, #root {
   line-height: 1.4;
 }
 
-/* Input Boxes */
+/* Inputs */
 .input-box {
   width: 100%;
   padding: 12px 16px;
@@ -64,7 +63,7 @@ html, body, #root {
   border-color: #0066cc;
 }
 
-/* Location List */
+/* LocationList */
 .location-form {
   display: flex;
   gap: 8px;
@@ -76,18 +75,17 @@ html, body, #root {
 .add-btn {
   width: 40px;
   height: 40px;
-  border: none;
-  border-radius: 50%;
   background: #0066cc;
   color: #fff;
+  border: none;
+  border-radius: 50%;
   font-size: 1.5rem;
-  line-height: 1;
   cursor: pointer;
 }
 .location-list {
   list-style: none;
   padding: 0;
-  margin: 0 0 8px;
+  margin: 0;
 }
 .location-item {
   display: flex;
@@ -96,7 +94,6 @@ html, body, #root {
   padding: 4px 0;
   border-bottom: 1px solid #eee;
   font-size: 0.95rem;
-  color: #333;
 }
 .reorder-buttons {
   display: flex;
@@ -115,7 +112,7 @@ html, body, #root {
   background: #f0f0f0;
 }
 
-/* Color Options */
+/* Color Dots */
 .color-options {
   display: flex;
   flex-wrap: wrap;
@@ -152,7 +149,7 @@ html, body, #root {
 }
 
 /*--------------------------------------
-  Right Panel & Photo Frame
+  Right Panel
 --------------------------------------*/
 .right-panel {
   flex: 1 1 60%;
@@ -164,37 +161,37 @@ html, body, #root {
   overflow: hidden;
 }
 
-/* Outer “frame” */
+/* Outer “photo frame” mat/backing */
 .map-frame {
-  background: #e6e8eb;       /* light grey backing */
-  padding: 40px;             /* outer frame width */
+  background: #e0e2e5;       /* light grey backing */
+  padding: 30px;             /* mat width */
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
+  width: 100%;
+  max-width: 600px;
 }
 
-/* Inner 3D photo frame */
+/* Thin, sleek black 3D frame */
 .map-inner {
   position: relative;
   width: 100%;
-  max-width: 500px;
   aspect-ratio: 3 / 4;
   background: #fff;
-  border-radius: 8px;
+  border: 4px solid #000;    /* thin black edge */
+  border-radius: 2px;        /* slight softening */
   box-shadow:
-    0 12px 24px rgba(0,0,0,0.15),  /* strong outer shadow */
-    inset 0 0 0 1px #ddd;          /* thin inner edge line */
+    0 8px 16px rgba(0, 0, 0, 0.25),  /* subtle deep shadow */
+    0 2px 6px rgba(0, 0, 0, 0.1);    /* ambient fill */
   overflow: hidden;
 }
 
-/* Actual map container inset (mat) */
+/* Actual map “photo” inset */
 .map-area {
   position: absolute;
-  inset: 20px;     /* creates a white “mat” margin */
+  inset: 8px;                /* space inside black frame */
   background: #fff;
   overflow: hidden;
-  border-radius: 4px;
 }
 
 /* Mapbox canvas fills its container */
@@ -205,7 +202,7 @@ html, body, #root {
   height: 100%;
 }
 
-/* Gradient fade on the map only */
+/* Gradient fade at bottom of map only */
 .mapbox-map::after {
   content: "";
   position: absolute;
@@ -221,7 +218,7 @@ html, body, #root {
   z-index: 2;
 }
 
-/* Labels over the fade */
+/* Labels over map fade */
 .map-labels {
   position: absolute;
   bottom: 24px;
@@ -244,7 +241,7 @@ html, body, #root {
   color: #00695c;
 }
 
-/* Hide Mapbox logos/controls */
+/* Hide unwanted Mapbox logos/controls */
 .mapboxgl-ctrl-logo,
 .mapbox-logo,
 .mapbox-improve-map,
