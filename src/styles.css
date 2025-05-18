@@ -1,269 +1,253 @@
-/* Global styles */
-body, html, #root {
+/*--------------------------------------
+  Global & Layout
+--------------------------------------*/
+* {
+  box-sizing: border-box;
+}
+html, body, #root {
   height: 100%;
   margin: 0;
   font-family: 'Helvetica Neue', Arial, sans-serif;
   background-color: #fafafa;
   color: #222;
 }
-
 .app-container {
   display: flex;
   height: 100vh;
+  overflow: hidden;
 }
 
-/* Left panel */
+/*--------------------------------------
+  Left Panel
+--------------------------------------*/
 .left-panel {
-  flex: 1 1 40%;
+  flex: 0 0 40%;
+  max-width: 40%;
   padding: 40px 50px;
-  background: white;
+  background: #fff;
   overflow-y: auto;
-  box-sizing: border-box;
-  box-shadow: inset -1px 0 0 #ddd;
+  border-right: 1px solid #e0e0e0;
 }
-
 .left-panel h1 {
+  margin: 0 0 24px;
+  font-size: 2.3rem;
   font-weight: 900;
-  font-size: 36px;
-  margin-bottom: 20px;
 }
-
+.left-panel section {
+  margin-bottom: 32px;
+}
 .left-panel h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
   font-weight: 700;
-  font-size: 16px;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
+  color: #1a2233;
 }
-
 .left-panel p {
-  font-size: 14px;
-  line-height: 1.4;
-  margin-top: 0;
-  margin-bottom: 18px;
+  margin: 0 0 12px;
+  font-size: 0.9rem;
   color: #555;
+  line-height: 1.4;
 }
 
-/* Input boxes */
+/* Input Boxes */
 .input-box {
   width: 100%;
   padding: 12px 16px;
-  font-size: 14px;
+  margin-bottom: 16px;
+  font-size: 1rem;
   border: 1.5px solid #bbb;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  box-sizing: border-box;
-  transition: border-color 0.2s ease-in-out;
+  border-radius: 6px;
+  transition: border-color 0.2s;
 }
-
 .input-box:focus {
   outline: none;
   border-color: #0066cc;
 }
 
-/* Color dots */
+/* Location List */
+.location-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.modern-input {
+  flex-grow: 1;
+}
+.add-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: #0066cc;
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.location-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px;
+}
+.location-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+  color: #333;
+}
+.reorder-buttons {
+  display: flex;
+  gap: 4px;
+}
+.reorder-buttons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+.reorder-buttons button:hover {
+  background: #f0f0f0;
+}
+
+/* Color Options */
 .color-options {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-bottom: 30px;
 }
-
 .color-dot {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  cursor: pointer;
   border: 2px solid transparent;
-  transition: border-color 0.3s ease;
+  cursor: pointer;
+  transition: border-color 0.2s;
 }
-
 .color-dot.selected,
 .color-dot:hover {
   border-color: #000;
 }
 
-/* Right panel */
+/* Download Button */
+.download-button {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 10px 16px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.download-button:hover {
+  background: #333;
+}
+
+/*--------------------------------------
+  Right Panel & Photo Frame
+--------------------------------------*/
 .right-panel {
   flex: 1 1 60%;
+  background: #f0f4f7;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0f4f7;
   padding: 40px;
-  box-sizing: border-box;
-}
-
-/* Photo frame container */
-.map-frame {
-  width: 100%;
-  max-width: 480px;
-  aspect-ratio: 3 / 4; /* width/height ratio */
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
   overflow: hidden;
-  position: relative;
+}
+
+/* Outer “frame” */
+.map-frame {
+  background: #e6e8eb;       /* light grey backing */
+  padding: 40px;             /* outer frame width */
   display: flex;
-  flex-direction: column;
-}
-
-/* Map itself */
-.map {
+  justify-content: center;
+  align-items: center;
   flex-grow: 1;
-  background-position: center;
-  background-size: cover;
+}
+
+/* Inner 3D photo frame */
+.map-inner {
   position: relative;
-}
-
-/* Gradient fade at bottom */
-.map::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 140px;
-  background: linear-gradient(180deg, rgba(255 255 255 / 0) 0%, rgba(255 255 255 / 0.9) 100%);
-  pointer-events: none;
-}
-
-/* Labels over gradient */
-.map-labels {
-  position: absolute;
-  bottom: 24px;
   width: 100%;
-  text-align: center;
-  padding: 0 20px;
-  box-sizing: border-box;
-  z-index: 10;
+  max-width: 500px;
+  aspect-ratio: 3 / 4;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow:
+    0 12px 24px rgba(0,0,0,0.15),  /* strong outer shadow */
+    inset 0 0 0 1px #ddd;          /* thin inner edge line */
+  overflow: hidden;
 }
 
-.map-labels h2 {
-  margin: 0;
-  font-weight: 900;
-  font-size: 24px;
-  color: #004d40; /* dark teal */
+/* Actual map container inset (mat) */
+.map-area {
+  position: absolute;
+  inset: 20px;     /* creates a white “mat” margin */
+  background: #fff;
+  overflow: hidden;
+  border-radius: 4px;
 }
 
-.map-labels p {
-  margin: 4px 0 0;
-  font-size: 16px;
-  font-weight: 600;
-  color: #00695c; /* lighter teal */
-}
-
-/* Mapbox container fills map-frame fully */
+/* Mapbox canvas fills its container */
 .mapbox-map {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  border-radius: 20px;
-  position: relative;
 }
 
-/* Adjust map-frame styles for proper mapbox usage */
-.map-frame {
-  width: 100%;
-  max-width: 480px;
-  aspect-ratio: 3 / 4;
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Gradient fade overlay */
-.map-frame::after {
+/* Gradient fade on the map only */
+.mapbox-map::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   height: 140px;
+  background: linear-gradient(to bottom,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.9) 100%
+  );
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(255 255 255 / 0) 0%, rgba(255 255 255 / 0.9) 100%);
-  border-radius: 0 0 20px 20px;
-  z-index: 5;
+  z-index: 2;
 }
 
-/* Labels appear above the gradient */
+/* Labels over the fade */
 .map-labels {
   position: absolute;
   bottom: 24px;
   width: 100%;
-  text-align: center;
   padding: 0 20px;
-  box-sizing: border-box;
-  z-index: 10;
-  pointer-events: none; /* so clicks pass through */
+  text-align: center;
+  z-index: 3;
+  pointer-events: none;
 }
-
 .map-labels h2 {
   margin: 0;
+  font-size: 1.5rem;
   font-weight: 900;
-  font-size: 24px;
   color: #004d40;
 }
-
 .map-labels p {
   margin: 4px 0 0;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   color: #00695c;
 }
 
-
-.download-button {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background-color: black;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.download-button:hover {
-  background-color: #333;
-}
-
-
-.location-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6px 0;
-}
-
-.reorder-buttons {
-  display: flex;
-  gap: 6px;
-}
-
-.reorder-buttons button {
-  background: none;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-  padding: 2px 6px;
-  border-radius: 4px;
-  transition: background 0.2s;
-}
-
-.reorder-buttons button:hover {
-  background-color: #eee;
-}
-
-.mapboxgl-ctrl-logo {
+/* Hide Mapbox logos/controls */
+.mapboxgl-ctrl-logo,
+.mapbox-logo,
+.mapbox-improve-map,
+.mapboxgl-ctrl-compass {
   display: none !important;
 }
-
-.mapbox-logo{
-  display: none !important;
-}
-
-.mapbox-logo{ display: none; } .mapboxgl-ctrl-logo { display: none !important; } .mapbox-improve-map { display: none; } .mapboxgl-ctrl-compass { display: none; }

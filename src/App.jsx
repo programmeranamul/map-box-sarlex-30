@@ -86,10 +86,14 @@ export default function App() {
       {/* Right panel */}
       <div className="right-panel">
         <div className="map-frame" ref={mapRef}>
-          <Map locations={locations} styleJSON={customStyles[selectedStyleKey]} />
-          <div className="map-labels">
-            <h2>{title}</h2>
-            <p>{description}</p>
+          <div className="map-inner">
+            <div className="map-area">
+              <Map locations={locations} styleJSON={customStyles[selectedStyleKey]} />
+              <div className="map-labels">
+                <h2>{title}</h2>
+                <p>{description}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
