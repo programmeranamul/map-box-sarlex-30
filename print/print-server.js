@@ -63,9 +63,9 @@ app.post("/api/print-map", async (req, res) => {
   const buffer = await posterHandle.screenshot({ type: "png" });
   
 
-    const debugPath = `./debug-screenshot-${Date.now()}.png`;
-    fs.writeFileSync(debugPath, buffer);
-    console.log(`✅ Debug screenshot saved to ${debugPath}`);
+    // const debugPath = `./debug-screenshot-${Date.now()}.png`;
+    // fs.writeFileSync(debugPath, buffer);
+    // console.log(`✅ Debug screenshot saved to ${debugPath}`);
   await browser.close();
 
   // 8) Return the PNG
