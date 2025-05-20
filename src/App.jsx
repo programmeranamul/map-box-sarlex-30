@@ -2,9 +2,9 @@ import React, { useState, useRef } from "react";
 import Map from "./Map";
 import LocationList from "./LocationList";
 import customStyles from "./mapbox_styles/style.json";
-import html2canvas from "html2canvas";            // ← switch to html2canvas
 import 'mapbox-gl/dist/mapbox-gl.css';
 import "./styles.css";
+import { useEffect } from "react";
 
 export default function App() {
   const [locations, setLocations] = useState([]);
@@ -15,34 +15,58 @@ export default function App() {
 
   const mapRef = useRef(null);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+  
+    // Title & Description
+    const qTitle = params.get("title");
+    const qDesc = params.get("description");
+    if (qTitle) setTitle(qTitle);
+    if (qDesc) setDescription(qDesc);
+  
+    // Style
+    const qStyle = params.get("style");
+    if (qStyle && customStyles[qStyle]) {
+      setSelectedStyleKey(qStyle);
+    }
+  
+    // Locations
+    const qLocs = params.get("locs");
+    if (qLocs) {
+      try {
+        const parsed = JSON.parse(qLocs);
+        if (Array.isArray(parsed)) setLocations(parsed);
+      } catch (err) {
+        console.warn("Invalid locations query param");
+      }
+    }
+  }, []);
+
   const handleDownload = async () => {
-    if (!mapRef.current) return;
-    const node = mapRef.current;
-
-    // set up scale for ~300 dpi on a 100 dpi screen
-    const scale = 14;
-
     try {
-      const canvas = await html2canvas(node, {
-        backgroundColor: null,
-        useCORS: true,
-        scale,
-        logging: false
+      const resp = await fetch("/api/print-map", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          locations,
+          title,
+          description,
+          styleKey: selectedStyleKey
+        })
       });
-
-      // Trigger download
-      canvas.toBlob((blob) => {
-        const link = document.createElement("a");
-        link.download = "travel-map-highres.png";
-        link.href = URL.createObjectURL(blob);
-        link.click();
-        URL.revokeObjectURL(link.href);
-      }, "image/png");
-
+      if (!resp.ok) throw new Error("Print failed");
+      const blob = await resp.blob();
+      const link = document.createElement("a");
+      link.download = "travel-map-A3-300dpi.png";
+      link.href = URL.createObjectURL(blob);
+      link.click();
+      URL.revokeObjectURL(link.href);
     } catch (err) {
-      console.error("High‑res download failed:", err);
+      console.error(err);
+      alert("Print‑quality map generation failed.");
     }
   };
+  
 
   return (
     <div className="app-container">

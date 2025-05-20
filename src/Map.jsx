@@ -17,15 +17,19 @@ export default function Map({ locations, styleJSON }) {
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
         style: styleJSON,
-        center: [76.6950, 11.4102], // Initial center (e.g., Ooty)
+        center: [76.6950, 11.4102],
         zoom: 8,
         interactive: true,
         preserveDrawingBuffer: true,
-        attributionControl: false
+        attributionControl: false,
       });
     } else {
       map.current.setStyle(styleJSON);
     }
+  
+    // 👇 Expose actual map instance for Puppeteer
+    window.__MAP__ = map.current;
+  
   }, [styleJSON]);
 
   useEffect(() => {
