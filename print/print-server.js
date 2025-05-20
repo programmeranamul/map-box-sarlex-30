@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json({ limit: "1mb" }));
 
 app.post("/api/print-map", async (req, res) => {
-  const { locations, title, description, styleKey } = req.body;
+    const { locations, title, description, styleKey, camera } = req.body;
 
   // 1) Launch Puppeteer with no navigation timeouts
   const browser = await puppeteer.launch({
@@ -29,35 +29,21 @@ app.post("/api/print-map", async (req, res) => {
 
   // 3) Build editor URL with your query params
   const editorUrl = new URL("http://localhost:5173/");
+  editorUrl.searchParams.set("screenshot", "true");
   editorUrl.searchParams.set("style", styleKey);
   editorUrl.searchParams.set("title", title);
   editorUrl.searchParams.set("description", description);
   editorUrl.searchParams.set("locs", JSON.stringify(locations));
 
+  if (camera) {
+    editorUrl.searchParams.set("center", JSON.stringify(camera.center));
+    editorUrl.searchParams.set("zoom", camera.zoom);
+    editorUrl.searchParams.set("bearing", camera.bearing);
+    editorUrl.searchParams.set("pitch", camera.pitch);
+  }
+  console.log(editorUrl.href);
   // 4) Go there & wait for network idle
   await page.goto(editorUrl.href, { waitUntil: "networkidle2", timeout: 0 });
-
-  // 5) Hide sidebar & expand map-frame (same as before)
-  await page.evaluate(() => {
-    const left = document.querySelector(".left-panel");
-    if (left) left.style.display = "none";
-
-    const right = document.querySelector(".right-panel");
-    if (right) {
-      right.style.width = "100vw";
-      right.style.padding = "0";
-    }
-
-    const frame = document.querySelector(".map-frame");
-    if (frame) {
-      frame.style.width = "100vw";
-      frame.style.height = "100vh";
-      frame.style.padding = "0";
-      frame.style.display = "flex";
-      frame.style.justifyContent = "center";
-      frame.style.alignItems = "center";
-    }
-  });
 
   // 6) Wait for Mapbox GL to finish rendering via waitForFunction
   //    This polls window.__MAP__.loaded() until true.

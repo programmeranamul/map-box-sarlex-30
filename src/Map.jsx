@@ -4,7 +4,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 mapboxgl.accessToken = "pk.eyJ1Ijoicm9uaXRqYWluIiwiYSI6ImNtYWR0cW05MDAwazEybHNmNzY1YzBjcm8ifQ.bmlMJ6vOAFces2OFHE1t1A";
 
-export default function Map({ locations, styleJSON }) {
+export default function Map({ locations, styleJSON, camera, isScreenshotMode }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const markers = useRef([]);
@@ -13,24 +13,56 @@ export default function Map({ locations, styleJSON }) {
   const labelLayerId = "label-layer";
 
   useEffect(() => {
+    if (isScreenshotMode && map.current) {
+      setTimeout(() => {
+        map.current.resize();
+      }, 300); // slight delay to let CSS apply
+    }
+  }, [isScreenshotMode]);
+
+  useEffect(() => {
+
+    const initialCenter = camera?.center || [76.6950, 11.4102];
+    const initialZoom = camera?.zoom ?? 8;
+    const initialBearing = camera?.bearing ?? 0;
+    const initialPitch = camera?.pitch ?? 0;
     if (!map.current) {
+      console.log('cam init', camera);
+      console.log(initialCenter, initialZoom, initialBearing, initialPitch);
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
         style: styleJSON,
-        center: [76.6950, 11.4102],
-        zoom: 8,
+        center: initialCenter,
+        zoom: initialZoom,
+        bearing: initialBearing,
+        pitch: initialPitch,
         interactive: true,
         preserveDrawingBuffer: true,
         attributionControl: false,
       });
     } else {
+      console.log('cam style', camera);
+      console.log(initialCenter, initialZoom, initialBearing, initialPitch);
       map.current.setStyle(styleJSON);
+
+      if (camera?.center) {
+        map.current.setCenter(camera.center);
+      }
+      if (typeof camera?.zoom === "number") {
+        map.current.setZoom(camera.zoom);
+      }
+      if (typeof camera?.bearing === "number") {
+        map.current.setBearing(camera.bearing);
+      }
+      if (typeof camera?.pitch === "number") {
+        map.current.setPitch(camera.pitch);
+      }
     }
   
     // 👇 Expose actual map instance for Puppeteer
     window.__MAP__ = map.current;
   
-  }, [styleJSON]);
+  }, [styleJSON, camera]);
 
   useEffect(() => {
     if (!map.current || !locations.length) return;

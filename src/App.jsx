@@ -12,8 +12,9 @@ export default function App() {
   const [description, setDescription] = useState("Julie & Alex");
   const [selectedStyleKey, setSelectedStyleKey] =
     useState(Object.keys(customStyles)[0]);
-
+  const [camera, setCamera] = useState(null); // ← added camera state
   const mapRef = useRef(null);
+  const [isScreenshotMode, setIsScreenshotMode] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -40,10 +41,37 @@ export default function App() {
         console.warn("Invalid locations query param");
       }
     }
+
+    if (params.get("screenshot") === "true") {
+      setIsScreenshotMode(true);
+    }
+
+    const qCenter = params.get("center");
+    const qZoom = parseFloat(params.get("zoom"));
+    const qBearing = parseFloat(params.get("bearing"));
+    const qPitch = parseFloat(params.get("pitch"));
+
+    if (qCenter || qZoom || qBearing || qPitch) {
+      const parsedCamera = {
+        center: qCenter ? JSON.parse(qCenter) : undefined,
+        zoom: qZoom ? parseFloat(qZoom) : undefined,
+        bearing: qBearing ? parseFloat(qBearing) : undefined,
+        pitch: qPitch ? parseFloat(qPitch) : undefined,
+      };
+      setCamera(parsedCamera);
+    }
   }, []);
 
   const handleDownload = async () => {
     try {
+      const map = window.__MAP__; // assuming you expose the map instance globally
+      const camera = {
+        center: map.getCenter(),     // { lng, lat }
+        zoom: map.getZoom(),
+        bearing: map.getBearing(),
+        pitch: map.getPitch()
+      };
+  
       const resp = await fetch("/api/print-map", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -51,10 +79,13 @@ export default function App() {
           locations,
           title,
           description,
-          styleKey: selectedStyleKey
+          styleKey: selectedStyleKey,
+          camera
         })
       });
+  
       if (!resp.ok) throw new Error("Print failed");
+  
       const blob = await resp.blob();
       const link = document.createElement("a");
       link.download = "travel-map-A3-300dpi.png";
@@ -65,11 +96,11 @@ export default function App() {
       console.error(err);
       alert("Print‑quality map generation failed.");
     }
-  };
+  };  
   
 
   return (
-    <div className="app-container">
+    <div className={`app-container ${isScreenshotMode ? "screenshot-mode" : ""}`}>
       <div className="left-panel">
         <h1>Create your travel map</h1>
 
@@ -136,6 +167,8 @@ export default function App() {
               <Map
                 locations={locations}
                 styleJSON={customStyles[selectedStyleKey]}
+                camera={camera}
+                isScreenshotMode={isScreenshotMode}
               />
               <div className="map-labels">
                 <h2>{title}</h2>

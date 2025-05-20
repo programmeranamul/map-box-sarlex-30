@@ -248,3 +248,34 @@ html, body, #root {
 .mapboxgl-ctrl-compass {
   display: none !important;
 }
+
+.screenshot-mode .left-panel {
+  display: none;
+}
+
+.screenshot-mode .right-panel {
+  width: 100vw;
+  padding: 0;
+}
+
+.screenshot-mode .map-frame {
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* Ensure no content overflows */
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.screenshot-mode .mapbox-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  box-shadow: none;
+}
