@@ -10,11 +10,18 @@ export default function App() {
   const [locations, setLocations] = useState([]);
   const [title, setTitle] = useState("Honeymoon");
   const [description, setDescription] = useState("Julie & Alex");
+  const [mapSize, setMapSize] = useState("A3"); // Default to A3
   const [selectedStyleKey, setSelectedStyleKey] =
     useState(Object.keys(customStyles)[0]);
   const [camera, setCamera] = useState(null); // ← added camera state
   const mapRef = useRef(null);
   const [isScreenshotMode, setIsScreenshotMode] = useState(false);
+
+  const sizePresets = {
+    A4: { width: 794, height: 1123 }, // 72 DPI preview of 210mm x 297mm
+    A3: { width: 1123, height: 1587 }, // 297mm x 420mm
+    Polaroid: { width: 800, height: 950 }, // Approx. square with room for label
+  };
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -46,6 +53,11 @@ export default function App() {
       setIsScreenshotMode(true);
     }
 
+    const qSize = params.get("size");
+    if (qSize && sizePresets[qSize]) {
+      setMapSize(qSize);
+    }
+    
     const qCenter = params.get("center");
     const qZoom = parseFloat(params.get("zoom"));
     const qBearing = parseFloat(params.get("bearing"));
@@ -80,7 +92,8 @@ export default function App() {
           title,
           description,
           styleKey: selectedStyleKey,
-          camera
+          camera,
+          mapSize
         })
       });
   
@@ -130,6 +143,21 @@ export default function App() {
                 />
               )
             )}
+          </div>
+        </section>
+
+        <section>
+          <h3>4. Choose Map Size</h3>
+          <div className="size-options">
+            {Object.keys(sizePresets).map((sizeKey) => (
+              <button
+                key={sizeKey}
+                className={`size-button ${mapSize === sizeKey ? "selected" : ""}`}
+                onClick={() => setMapSize(sizeKey)}
+              >
+                {sizeKey}
+              </button>
+            ))}
           </div>
         </section>
 

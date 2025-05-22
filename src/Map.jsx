@@ -1,3 +1,4 @@
+// map.jsx
 import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -97,12 +98,11 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
       const bounds = new mapboxgl.LngLatBounds();
       locations.forEach(loc => {
         const el = document.createElement("div");
-        el.style.width = "12px";
-        el.style.height = "12px";
-        el.style.backgroundColor = "white";
+        el.style.width = "10px";
+        el.style.height = "10px";
+        el.style.backgroundColor = "#1a1a1a"; // Unified fill + border color
         el.style.borderRadius = "50%";
-        el.style.boxShadow = "0 0 4px rgba(0, 0, 0, 0.5)";
-        el.style.border = "2px solid #333"; // optional for visibility
+        el.style.border = "2px solid #1a1a1a"; // Same as fill
 
         const marker = new mapboxgl.Marker({ element: el })
           .setLngLat(loc.coords)
@@ -127,13 +127,22 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
           source: labelSourceId,
           layout: {
             "text-field": ["get", "title"],
-            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-            "text-offset": [0, 1.5],
+            "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
+            "text-offset": [0, 0.1], // Subtle offset
             "text-anchor": "top",
+            "text-allow-overlap": true
           },
           paint: {
-            "text-color": "#333",
-          },
+            "text-color": "#1a1a1a",
+            "text-size": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              5, 8,
+              10, 10,
+              15, 12
+            ]
+          }
         });
       }
 
@@ -178,10 +187,10 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
               },
               type: "line",
               paint: {
-                "line-color": "#444",         // Subtle dark gray
+                "line-color": "#1a1a1a",         // Subtle dark gray
                 "line-width": 2,              // Thinner line
-                "line-dasharray": [2, 4],     // Dashed pattern: 2px dash, 4px gap
-                "line-opacity": 0.8           // Slight transparency for elegance
+                "line-dasharray": [1, 2],     // Dashed pattern: 2px dash, 4px gap
+                "line-opacity": 0.6          // Slight transparency for elegance
               }
             });
           })
@@ -196,7 +205,7 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
       map.current.once("style.load", applyLocationLogic);
     }
 
-  }, [locations]);
+  }, [locations, styleJSON]);
 
   return (
     <div ref={mapContainer} className="mapbox-map" />

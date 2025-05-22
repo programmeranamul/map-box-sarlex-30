@@ -5,10 +5,17 @@ import bodyParser from "body-parser";
 import fs from "fs";
 
 const app = express();
+
+const sizePresets = {
+  A4: { width: 2480, height: 3508 },      // 210mm x 297mm @ 300dpi
+  A3: { width: 3508, height: 4961 },      // 297mm x 420mm @ 300dpi
+  Polaroid: { width: 2550, height: 3030 } // ~8.5in x 10.1in @ 300dpi
+};
+
 app.use(bodyParser.json({ limit: "1mb" }));
 
 app.post("/api/print-map", async (req, res) => {
-    const { locations, title, description, styleKey, camera } = req.body;
+  const { locations, title, description, styleKey, camera, mapSize } = req.body;
 
   // 1) Launch Puppeteer with no navigation timeouts
   const browser = await puppeteer.launch({
@@ -19,11 +26,12 @@ app.post("/api/print-map", async (req, res) => {
   });
   const page = await browser.newPage();
 
-  // 2) Set A3 @300dpi viewport
+  const { width, height } = sizePresets[mapSize] || sizePresets.A3;
+
   await page.setViewport({
-    width: 1920 * 2,          // 3840px layout width
-    height: 1080 * 2,         // 2160px layout height
-    deviceScaleFactor: 2,     // Effective 4K resolution (7680x4320 if needed)
+    width,
+    height,
+    deviceScaleFactor: 1, // Use 1:1 pixels since we're setting true dimensions
   });
   
 
@@ -41,7 +49,11 @@ app.post("/api/print-map", async (req, res) => {
     editorUrl.searchParams.set("bearing", camera.bearing);
     editorUrl.searchParams.set("pitch", camera.pitch);
   }
+  editorUrl.searchParams.set("size", mapSize);
+
+  // once finalized, let's log the url
   console.log(editorUrl.href);
+  
   // 4) Go there & wait for network idle
   await page.goto(editorUrl.href, { waitUntil: "networkidle2", timeout: 0 });
 
@@ -62,10 +74,6 @@ app.post("/api/print-map", async (req, res) => {
   const posterHandle = await page.$(".map-inner");
   const buffer = await posterHandle.screenshot({ type: "png" });
   
-
-    // const debugPath = `./debug-screenshot-${Date.now()}.png`;
-    // fs.writeFileSync(debugPath, buffer);
-    // console.log(`✅ Debug screenshot saved to ${debugPath}`);
   await browser.close();
 
   // 8) Return the PNG

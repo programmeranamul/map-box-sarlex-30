@@ -189,7 +189,7 @@ html, body, #root {
 /* Actual map “photo” inset */
 .map-area {
   position: absolute;
-  inset: 8px;                /* space inside black frame */
+  inset: 20px;                /* space inside black frame */
   background: #fff;
   overflow: hidden;
 }
@@ -278,4 +278,24 @@ html, body, #root {
   height: 100%;
   border-radius: 0;
   box-shadow: none;
+}
+
+.size-options {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.size-button {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.size-button.selected {
+  background: black;
+  color: white;
+  border-color: black;
 }
