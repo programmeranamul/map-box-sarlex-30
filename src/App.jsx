@@ -189,19 +189,17 @@ export default function App() {
       </div>
 
       <div className="right-panel">
-        <div className="map-frame" ref={mapRef}>
-          <div className="map-inner">
-            <div className="map-area">
-              <Map
-                locations={locations}
-                styleJSON={customStyles[selectedStyleKey]}
-                camera={camera}
-                isScreenshotMode={isScreenshotMode}
-              />
-              <div className="map-labels">
-                <h2>{title}</h2>
-                <p>{description}</p>
-              </div>
+        <div className="map-inner" ref={mapRef}>
+          <div className="map-area">
+            <Map
+              locations={locations}
+              styleJSON={customStyles[selectedStyleKey]}
+              camera={camera}
+              isScreenshotMode={isScreenshotMode}
+            />
+            <div className="map-labels">
+              <h2>{title}</h2>
+              <p>{description}</p>
             </div>
           </div>
         </div>
