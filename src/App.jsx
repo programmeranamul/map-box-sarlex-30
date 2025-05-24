@@ -1,3 +1,4 @@
+// App.jsx
 import React, { useState, useRef } from "react";
 import Map from "./Map";
 import LocationList from "./LocationList";
