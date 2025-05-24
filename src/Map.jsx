@@ -5,6 +5,47 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 mapboxgl.accessToken = "pk.eyJ1Ijoicm9uaXRqYWluIiwiYSI6ImNtYWR0cW05MDAwazEybHNmNzY1YzBjcm8ifQ.bmlMJ6vOAFces2OFHE1t1A";
 
+const commonStyle = {
+  markerSize: 10, // diameter in px
+  labelFontFamily: ["EB Garamond Regular"],
+}
+
+const styleLight = {
+  markerColor: "#EFF1DB",
+  markerBorderColor: "#EFF1DB",
+  labelTextColor: "#EFF1DB",
+  routeLineColor: "#FFD4DB",
+  routeLineWidth: 2,
+  routeDashArray: [1, 2],
+  routeLineOpacity: 0.6,
+  ...commonStyle
+};
+
+const styleDark = {
+  markerColor: "#211522",
+  markerBorderColor: "#211522",
+  labelTextColor: "#211522",
+  routeLineColor: "#613659",
+  routeLineWidth: 2,
+  routeDashArray: [1, 2],
+  routeLineOpacity: 0.6,
+  ...commonStyle
+};
+
+const mapStyles  = {
+  "Basic": styleLight,
+  "Monochrome - Sky blue": styleDark,
+  "Monochrome - Vintage - Green": styleDark,
+  "Monochrome - Rusty": styleLight,
+  "Monochrome - Pink": styleDark,
+  "Monochrome - Lavender": styleDark,
+  "Monochrome - Royal Purple": styleLight,
+  "Monochrome - Midnight Green": styleLight,
+  "Monochrome - Light Green": styleLight,
+  "IMP V2 RED": styleLight,
+  "IMP V2 Grey": styleLight
+};
+
 export default function Map({ locations, styleJSON, camera, isScreenshotMode }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
@@ -12,6 +53,7 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
   const routeLayerId = "route";
   const labelSourceId = "label-source";
   const labelLayerId = "label-layer";
+  const styleKey = styleJSON['name'];
 
   useEffect(() => {
     if (isScreenshotMode && map.current) {
@@ -67,7 +109,7 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
 
   useEffect(() => {
     if (!map.current || !locations.length) return;
-
+    let style = mapStyles[styleKey];
     const applyLocationLogic = () => {
       // Remove old markers
       markers.current.forEach(marker => marker.remove());
@@ -98,11 +140,12 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
       const bounds = new mapboxgl.LngLatBounds();
       locations.forEach(loc => {
         const el = document.createElement("div");
-        el.style.width = "10px";
-        el.style.height = "10px";
-        el.style.backgroundColor = "#1a1a1a"; // Unified fill + border color
+        const size = style.markerSize;
+        el.style.width = `${size}px`;
+        el.style.height = `${size}px`;
+        el.style.backgroundColor = style.markerColor; // Unified fill + border color
         el.style.borderRadius = "50%";
-        el.style.border = "2px solid #1a1a1a"; // Same as fill
+        el.style.border = `2px solid ${style.markerBorderColor}`; // Same as fill
 
         const marker = new mapboxgl.Marker({ element: el })
           .setLngLat(loc.coords)
@@ -127,13 +170,13 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
           source: labelSourceId,
           layout: {
             "text-field": ["get", "title"],
-            "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
+            "text-font": style.labelFontFamily,
             "text-offset": [0, 0.1], // Subtle offset
             "text-anchor": "top",
             "text-allow-overlap": true
           },
           paint: {
-            "text-color": "#1a1a1a",
+            "text-color": style.labelTextColor,
             "text-size": [
               "interpolate",
               ["linear"],
@@ -187,10 +230,10 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
               },
               type: "line",
               paint: {
-                "line-color": "#1a1a1a",         // Subtle dark gray
-                "line-width": 2,              // Thinner line
-                "line-dasharray": [1, 2],     // Dashed pattern: 2px dash, 4px gap
-                "line-opacity": 0.6          // Slight transparency for elegance
+                "line-color": style.routeLineColor,         // Subtle dark gray
+                "line-width": style.routeLineWidth,              // Thinner line
+                "line-dasharray": style.routeDashArray,     // Dashed pattern: 2px dash, 4px gap
+                "line-opacity": style.routeLineOpacity       // Slight transparency for elegance
               }
             });
           })
@@ -205,7 +248,7 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
       map.current.once("style.load", applyLocationLogic);
     }
 
-  }, [locations, styleJSON]);
+  }, [locations, styleJSON, styleKey]);
 
   return (
     <div ref={mapContainer} className="mapbox-map" />
