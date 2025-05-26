@@ -64,8 +64,10 @@ export default function App() {
     const qBearing = parseFloat(params.get("bearing"));
     const qPitch = parseFloat(params.get("pitch"));
 
+    const qBounds = params.get("bounds");
     if (qCenter || qZoom || qBearing || qPitch) {
       const parsedCamera = {
+        bounds: JSON.parse(qBounds), // bounds = [[sw_lng, sw_lat], [ne_lng, ne_lat]]
         center: qCenter ? JSON.parse(qCenter) : undefined,
         zoom: qZoom ? parseFloat(qZoom) : undefined,
         bearing: qBearing ? parseFloat(qBearing) : undefined,
@@ -78,11 +80,16 @@ export default function App() {
   const handleDownload = async () => {
     try {
       const map = window.__MAP__; // assuming you expose the map instance globally
+      const bounds = map.getBounds(); // mapboxgl.LngLatBounds
       const camera = {
         center: map.getCenter(),     // { lng, lat }
         zoom: map.getZoom(),
         bearing: map.getBearing(),
-        pitch: map.getPitch()
+        pitch: map.getPitch(),
+        bounds: [
+          [bounds.getSouthWest().lng, bounds.getSouthWest().lat],
+          [bounds.getNorthEast().lng, bounds.getNorthEast().lat]
+        ]
       };
   
       const resp = await fetch("/api/print-map", {

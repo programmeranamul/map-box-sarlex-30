@@ -68,6 +68,31 @@ html, body, #root {
   border-color: #0066cc;
 }
 
+.minimap-container .mapboxgl-canvas {
+  position: relative !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.minimap-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 180px;
+  height: 180px;
+  background: white;
+  border: 3px solid #555 !important; /* More visible border */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  z-index: 1000;
+}
+
+/* Hide minimap controls and attribution */
+.minimap-container .mapboxgl-control-container {
+  display: none !important;
+}
+
 /* LocationList */
 .location-form {
   display: flex;
@@ -223,10 +248,11 @@ html, body, #root {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 140px;
+  height: 160px; /* Increased gradient area */
   background: linear-gradient(to bottom,
     rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.9) 100%
+    rgba(255,255,255,0.95) 80%,
+    rgba(255,255,255,1) 100%
   );
   pointer-events: none;
   z-index: 2;
@@ -244,15 +270,20 @@ html, body, #root {
 }
 .map-labels h2 {
   margin: 0;
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: #004d40;
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  text-shadow: 
+    0 1px 3px rgba(0,0,0,0.3),
+    0 1px 1px rgba(0,0,0,0.2);
 }
 .map-labels p {
   margin: 4px 0 0;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  color: #00695c;
+  color: #1a1a1a;
+  text-shadow: 
+    0 1px 2px rgba(0,0,0,0.3);
 }
 
 /* Hide unwanted Mapbox logos/controls */

@@ -16,7 +16,7 @@ app.use(bodyParser.json({ limit: "1mb" }));
 
 app.post("/api/print-map", async (req, res) => {
   const { locations, title, description, styleKey, camera, mapSize } = req.body;
-
+  console.log(camera);
   // 1) Launch Puppeteer with no navigation timeouts
   const browser = await puppeteer.launch({
     // you can add '--no-sandbox' if your env requires it
@@ -48,6 +48,7 @@ app.post("/api/print-map", async (req, res) => {
     editorUrl.searchParams.set("zoom", camera.zoom);
     editorUrl.searchParams.set("bearing", camera.bearing);
     editorUrl.searchParams.set("pitch", camera.pitch);
+    editorUrl.searchParams.set("bounds", JSON.stringify(camera.bounds));
   }
   editorUrl.searchParams.set("size", mapSize);
 
