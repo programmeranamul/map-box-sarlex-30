@@ -1,31 +1,51 @@
-// LocationsList.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function LocationList({ locations, setLocations }) {
   const [input, setInput] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
 
-  const addLocation = async (e) => {
-    e.preventDefault();
-    if (!input.trim()) return;
+  useEffect(() => {
+    if (input.trim().length > 2) {
+      const timer = setTimeout(() => {
+        fetchSuggestions(input);
+      }, 300);
+      return () => clearTimeout(timer);
+    } else {
+      setSuggestions([]);
+    }
+  }, [input]);
 
+  const fetchSuggestions = async (query) => {
     try {
       const res = await fetch(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
-          input
+          query
         )}.json?access_token=pk.eyJ1Ijoicm9uaXRqYWluIiwiYSI6ImNtYWR0cW05MDAwazEybHNmNzY1YzBjcm8ifQ.bmlMJ6vOAFces2OFHE1t1A`
       );
       const data = await res.json();
-      
-      if (data.features && data.features.length > 0) {
-        const newLocation = {
-          name: data.features[0].place_name,
-          coords: data.features[0].center,
-        };
-        setLocations([...locations, newLocation]);
-        setInput("");
-      }
+      setSuggestions(data.features || []);
     } catch (error) {
-      console.error("Error fetching location:", error);
+      console.error("Error fetching suggestions:", error);
+      setSuggestions([]);
+    }
+  };
+
+  const addLocation = (feature) => {
+    const newLocation = {
+      name: feature.place_name,
+      coords: feature.center,
+    };
+    setLocations([...locations, newLocation]);
+    setInput("");
+    setSuggestions([]);
+    setShowDropdown(false);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (suggestions.length > 0) {
+      addLocation(suggestions[0]);
     }
   };
 
@@ -39,43 +59,89 @@ export default function LocationList({ locations, setLocations }) {
 
   return (
     <div>
-      <form className="location-form" onSubmit={addLocation}>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Add your locations"
-          className="modern-input"
-        />
-        <button type="submit" className="add-btn" aria-label="Add location">+</button>
+      <form className="location-search-container" onSubmit={handleSubmit}>
+        <div style={{ position: 'relative', flex: 1 }}>
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => {
+              setInput(e.target.value);
+              setShowDropdown(true);
+            }}
+            onFocus={() => setShowDropdown(true)}
+            onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
+            placeholder="Search for a location..."
+            className="search-input"
+          />
+          {showDropdown && suggestions.length > 0 && (
+            <div className="location-dropdown">
+              {suggestions.map((feature, i) => (
+                <div
+                  key={i}
+                  className="location-dropdown-item"
+                  onMouseDown={() => addLocation(feature)}
+                >
+                  {feature.place_name}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        <button type="submit" className="add-btn" aria-label="Add location">
+          +
+        </button>
       </form>
+      
       <ul className="location-list">
         {locations.map((loc, i) => (
           <li key={i} className="location-item">
-            {loc.name}
-            <div className="reorder-buttons">
-              <button onClick={() => moveItem(i, i - 1)} aria-label="Move up">↑</button>
-              <button onClick={() => moveItem(i, i + 1)} aria-label="Move down">↓</button>
-              <button onClick={() => {
+            <span className="location-name">{loc.name}</span>
+            <div className="location-actions">
+              <button
+                className="action-btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  moveItem(i, i - 1);
+                }}
+                aria-label="Move up"
+                disabled={i === 0}
+              >
+                ↑
+              </button>
+              <button
+                className="action-btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  moveItem(i, i + 1);
+                }}
+                aria-label="Move down"
+                disabled={i === locations.length - 1}
+              >
+                ↓
+              </button>
+              <button
+                className="action-btn"
+                onClick={(e) => {
+                  e.preventDefault();
                   const updated = [...locations];
                   updated.splice(i, 1);
                   setLocations(updated);
-                }} aria-label="Delete">×
+                }}
+                aria-label="Delete"
+              >
+                ×
               </button>
             </div>
           </li>
         ))}
       </ul>
+      
       {locations.length > 0 && (
         <button
-          onClick={() => setLocations([])}
-          style={{
-            marginTop: "12px",
-            background: "#ddd",
-            padding: "6px 10px",
-            borderRadius: "4px",
-            fontSize: "0.85rem",
-            cursor: "pointer"
+          className="reset-all-btn"
+          onClick={(e) => {
+            e.preventDefault();
+            setLocations([]);
           }}
         >
           Reset All Locations
@@ -84,4 +150,3 @@ export default function LocationList({ locations, setLocations }) {
     </div>
   );
 }
-

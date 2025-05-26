@@ -184,16 +184,6 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode, ma
 
   useEffect(() => {
 
-    const shouldRedraw =
-    locations.length === 0 ||
-    locations.length !== prevLocations.current.length ||
-    locations.some((loc, i) =>
-      !prevLocations.current[i] ||
-      loc.name !== prevLocations.current[i].name ||
-      loc.coords[0] !== prevLocations.current[i].coords[0] ||
-      loc.coords[1] !== prevLocations.current[i].coords[1]
-    );
-
     if (!map.current) return;
     let style = mapStyles[styleKey];
     
@@ -243,7 +233,7 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode, ma
       // Inside the locations.forEach loop in applyLocationLogic
       locations.forEach((loc, index) => {
 
-        if (locationAdded.includes(loc.name) === false) {
+        if (locationAdded.includes(loc.name)) {
           return;
         }
         locationAdded.push(loc.name);
