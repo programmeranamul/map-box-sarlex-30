@@ -104,17 +104,6 @@ html, body, #root {
   padding: 12px 16px;
 }
 
-.add-btn {
-  width: 40px;
-  height: 40px;
-  background: #0066cc;
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
 .location-list + button {
   background: #f0f0f0 !important;
   color: #333 !important;
@@ -136,21 +125,6 @@ html, body, #root {
   padding: 4px 0;
   border-bottom: 1px solid #eee;
   font-size: 0.95rem;
-}
-.reorder-buttons {
-  display: flex;
-  gap: 4px;
-}
-.reorder-buttons button {
-  color: #666;
-  padding: 4px 8px;
-  font-weight: 500;
-  transition: all 0.2s;
-}
-
-.reorder-buttons button:hover {
-  color: #333;
-  background: #f8f8f8;
 }
 
 /* Color Dots */
@@ -508,24 +482,6 @@ html, body, #root {
   transition: all 0.2s;
 }
 
-.add-btn {
-  background: #1a1a1a;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  font-size: 1.8rem;
-  line-height: 1;
-  padding-bottom: 4px; /* Visual centering adjustment */
-}
-
-.add-btn:hover {
-  background: #0066cc;
-  transform: scale(1.05);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
 .location-item {
   padding: 12px;
   margin-bottom: 8px;
@@ -545,58 +501,6 @@ html, body, #root {
   border: none;
 }
 
-/* Improved Location Search & Dropdown */
-.location-search-container {
-  position: relative;
-  margin-bottom: 16px;
-}
-
-.location-dropdown {
-  position: absolute;
-  width: 100%;
-  max-height: 200px;
-  overflow-y: auto;
-  background: white;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-  margin-top: 4px;
-}
-
-.location-dropdown-item {
-  padding: 12px 16px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.location-dropdown-item:hover {
-  background: #f5f5f5;
-}
-
-/* Enhanced Location List Items */
-.location-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 16px;
-  margin-bottom: 8px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.location-item:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.location-name {
-  flex-grow: 1;
-  font-size: 0.95rem;
-}
-
 /* Improved Action Buttons */
 .reorder-buttons {
   display: flex;
@@ -621,164 +525,6 @@ html, body, #root {
   background: #f5f5f5;
   color: #333;
   border-color: #ccc;
-}
-
-/* Reset Button Styling */
-.reset-all-btn {
-  width: 100%;
-  padding: 10px;
-  margin-top: 16px;
-  background: #f5f5f5;
-  color: #333;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.reset-all-btn:hover {
-  background: #e0e0e0;
-  border-color: #ccc;
-}
-
-/* Add Button Improvements */
-.add-btn {
-  width: 44px;
-  height: 44px;
-  background: #1a1a1a;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.add-btn:hover {
-  background: #0066cc;
-  transform: scale(1.05);
-}
-
-/* Improved Location Search & Dropdown */
-.location-search-container {
-  position: relative;
-  margin-bottom: 16px;
-}
-
-.location-dropdown {
-  position: absolute;
-  width: 100%;
-  max-height: 200px;
-  overflow-y: auto;
-  background: white;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-  margin-top: 4px;
-}
-
-.location-dropdown-item {
-  padding: 12px 16px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.location-dropdown-item:hover {
-  background: #f5f5f5;
-}
-
-/* Enhanced Location List Items */
-.location-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 16px;
-  margin-bottom: 8px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.location-item:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.location-name {
-  flex-grow: 1;
-  font-size: 0.95rem;
-}
-
-/* Improved Action Buttons */
-.reorder-buttons {
-  display: flex;
-  gap: 8px;
-}
-
-.reorder-buttons button {
-  background: none;
-  border: 1px solid #e0e0e0;
-  color: #666;
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.reorder-buttons button:hover {
-  background: #f5f5f5;
-  color: #333;
-  border-color: #ccc;
-}
-
-/* Reset Button Styling */
-.reset-all-btn {
-  width: 100%;
-  padding: 10px;
-  margin-top: 16px;
-  background: #f5f5f5;
-  color: #333;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.reset-all-btn:hover {
-  background: #e0e0e0;
-  border-color: #ccc;
-}
-
-/* Add Button Improvements */
-.add-btn {
-  width: 44px;
-  height: 44px;
-  background: #1a1a1a;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.add-btn:hover {
-  background: #0066cc;
-  transform: scale(1.05);
 }
 
 /* Improved Location Search Container */
