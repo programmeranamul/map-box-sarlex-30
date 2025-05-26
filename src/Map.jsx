@@ -6,8 +6,8 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 mapboxgl.accessToken = "pk.eyJ1Ijoicm9uaXRqYWluIiwiYSI6ImNtYWR0cW05MDAwazEybHNmNzY1YzBjcm8ifQ.bmlMJ6vOAFces2OFHE1t1A";
 
 const commonStyle = {
-  markerSize: 15, // diameter in px
-  labelFontFamily: ["EB Garamond Regular"],
+  markerSize: 20, // diameter in px
+  labelFontFamily: ["EB Garamond Bold"],
 }
 
 const styleLight = {
@@ -81,7 +81,7 @@ async function getCountryBbox(lngLat) {
   return null;
 }
 
-export default function Map({ locations, styleJSON, camera, isScreenshotMode }) {
+export default function Map({ locations, styleJSON, camera, isScreenshotMode, mapSize }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const markers = useRef([]);
@@ -92,6 +92,7 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
   const minimapRef = useRef(null);
   const minimapMarkerRef = useRef(null);
   const prevLocations = useRef([]);
+  const showMinimap = true;
 
   useEffect(() => {
     if (isScreenshotMode && map.current) {
@@ -128,38 +129,40 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
     if (!map.current) {
       map.current = new mapboxgl.Map(mapInitOptions);
 
-      // ✅ Step 1: Create outer container
-      const minimapContainer = document.createElement('div');
-      minimapContainer.className = 'minimap-container';
+      if (showMinimap) {
+          // ✅ Step 1: Create outer container
+          const minimapContainer = document.createElement('div');
+          minimapContainer.className = 'minimap-container';
 
-      // ✅ Step 2: Append to DOM
-      map.current.getContainer().appendChild(minimapContainer);
+          // ✅ Step 2: Append to DOM
+          map.current.getContainer().appendChild(minimapContainer);
 
-      // ✅ Step 3: Inner container
-      const minimapInnerContainer = document.createElement('div');
-      minimapInnerContainer.style.width = '100%';
-      minimapInnerContainer.style.height = '100%';
-      minimapContainer.appendChild(minimapInnerContainer);
+          // ✅ Step 3: Inner container
+          const minimapInnerContainer = document.createElement('div');
+          minimapInnerContainer.style.width = '100%';
+          minimapInnerContainer.style.height = '100%';
+          minimapContainer.appendChild(minimapInnerContainer);
 
-      // ✅ Step 4: Initialize minimap
-      minimapRef.current = new mapboxgl.Map({
-        container: minimapInnerContainer,
-        style: styleJSON,
-        interactive: false,
-        attributionControl: false,
-        preserveDrawingBuffer: true
-      });
-      
-      minimapRef.current.on('load', () => {
-        minimapRef.current.setRenderWorldCopies(false);
-        minimapRef.current.resize();
-      });
+          // ✅ Step 4: Initialize minimap
+          minimapRef.current = new mapboxgl.Map({
+            container: minimapInnerContainer,
+            style: styleJSON,
+            interactive: false,
+            attributionControl: false,
+            preserveDrawingBuffer: true
+          });
+
+          minimapRef.current.on('load', () => {
+            minimapRef.current.setRenderWorldCopies(false);
+            minimapRef.current.resize();
+          });
+      }
       
 
     } else {
       map.current.setStyle(styleJSON);
-      minimapRef.current.setStyle(styleJSON);
-      
+      minimapRef.current?.setStyle(styleJSON);
+
       if (camera?.center) {
         map.current.setCenter(camera.center);
       }
@@ -208,6 +211,7 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
       return;
     }
 
+    const locationAdded = [];
     const applyLocationLogic = () => {
       // Remove old markers
       markers.current.forEach(marker => marker.remove());
@@ -238,6 +242,12 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
       const bounds = new mapboxgl.LngLatBounds();
       // Inside the locations.forEach loop in applyLocationLogic
       locations.forEach((loc, index) => {
+
+        if (locationAdded.includes(loc.name) === false) {
+          return;
+        }
+        locationAdded.push(loc.name);
+
         const el = document.createElement("div");
         const size = style.markerSize;
         
@@ -249,21 +259,19 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
         el.style.borderRadius = "50%";
 
         // Number element
-        if (!el.querySelector(".marker-number")) {
-          const number = document.createElement("span");
-          number.className = "marker-number";
-          number.textContent = index + 1; // Sequence starts at 1
-          number.style.position = "absolute";
-          number.style.top = "50%";
-          number.style.left = "50%";
-          number.style.transform = "translate(-50%, -50%)";
-          number.style.color = style.markerTextColor; // Use the new color
-          number.style.fontFamily = style.labelFontFamily.join(", ");
-          number.style.fontSize = "10px";
-          number.style.fontWeight = "bold";
-          number.style.userSelect = "none"; // Prevent text selection
-          el.appendChild(number);
-        }
+        const number = document.createElement("span");
+        number.className = "marker-number";
+        number.textContent = index + 1; // Sequence starts at 1
+        number.style.position = "absolute";
+        number.style.top = "50%";
+        number.style.left = "50%";
+        number.style.transform = "translate(-50%, -50%)";
+        number.style.color = style.markerTextColor; // Use the new color
+        number.style.fontFamily = style.labelFontFamily.join(", ");
+        number.style.fontSize = "10px";
+        number.style.fontWeight = "bold";
+        number.style.userSelect = "none"; // Prevent text selection
+        el.appendChild(number);
 
         // Create and add marker
         const marker = new mapboxgl.Marker({ element: el })
@@ -290,20 +298,13 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
           layout: {
             "text-field": ["get", "title"],
             "text-font": style.labelFontFamily,
-            "text-offset": [0, 0.1], // Subtle offset
+            "text-offset": [0, 0.5], // Subtle offset
             "text-anchor": "top",
-            "text-allow-overlap": true
+            "text-allow-overlap": true,
+            "text-size": 20
           },
           paint: {
-            "text-color": style.labelTextColor,
-            "text-size": [
-              "interpolate",
-              ["linear"],
-              ["zoom"],
-              5, 12,
-              10, 16,
-              15, 20
-            ]
+            "text-color": style.labelTextColor
           }
         });
       }
@@ -398,10 +399,10 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
         );
       };
   
-      if (minimapRef.current.isStyleLoaded()) {
+      if (minimapRef.current?.isStyleLoaded()) {
         applyMinimap();
       } else {
-        minimapRef.current.once('style.load', applyMinimap);
+        minimapRef.current?.once('style.load', applyMinimap);
       }
     }
 

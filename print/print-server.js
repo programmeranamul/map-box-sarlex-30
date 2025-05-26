@@ -2,14 +2,13 @@
 import express from "express";
 import puppeteer from "puppeteer";
 import bodyParser from "body-parser";
-import fs from "fs";
 
 const app = express();
 
 const sizePresets = {
-  A4: { width: 2480, height: 3508 },      // 210mm x 297mm @ 300dpi
-  A3: { width: 3508, height: 4961 },      // 297mm x 420mm @ 300dpi
-  Polaroid: { width: 2550, height: 3030 } // ~8.5in x 10.1in @ 300dpi
+  A4: { width: 2480, height: 3508 },      // 210x297mm @300dpi
+  Polaroid: { width: 2550, height: 3300 }, // 85x110mm @300dpi
+  "Instax Mini": { width: 637, height: 1016 } // 54x86mm @300dpi
 };
 
 app.use(bodyParser.json({ limit: "1mb" }));
@@ -26,14 +25,13 @@ app.post("/api/print-map", async (req, res) => {
   });
   const page = await browser.newPage();
 
-  const { width, height } = sizePresets[mapSize] || sizePresets.A3;
+  const { width, height } = sizePresets[mapSize] || sizePresets.A4;
 
   await page.setViewport({
     width,
     height,
     deviceScaleFactor: 1, // Use 1:1 pixels since we're setting true dimensions
   });
-  
 
   // 3) Build editor URL with your query params
   const editorUrl = new URL("http://localhost:5173/");

@@ -204,24 +204,23 @@ html, body, #root {
 }
 
 /* Thin, sleek black 3D frame */
+
 .map-inner {
   position: relative;
-  width: 100%;
-  aspect-ratio: 210 / 297; /* ≈ 0.707 */
-  max-height: 95vh; /* 👈 Add this line */
-  max-width: calc(95vh * 0.707); /* auto width to keep A4 aspect */
   background: #fff;
-  border: 4px solid #000;    /* thin black edge */
-  border-radius: 2px;        /* slight softening */
-  box-shadow:
-    0 8px 16px rgba(0, 0, 0, 0.25),  /* subtle deep shadow */
-    0 2px 6px rgba(0, 0, 0, 0.1);    /* ambient fill */
+  border: 4px solid #000;
+  border-radius: 2px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25), 0 2px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  padding: 30px;
 
-  padding: 30px;             /* mat width */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  /* Dynamic sizing */
+  width: var(--map-width);
+  height: var(--map-height);
+  aspect-ratio: var(--map-aspect);
+  /* max-width: 95vw; */
+  max-width: 600px;
+  max-height: 95vh;
 }
 
 /* Actual map “photo” inset */
@@ -327,4 +326,61 @@ html, body, #root {
   background: black;
   color: white;
   border-color: black;
+}
+
+/* Add specific size treatments */
+.size-preset-polaroid .map-labels h2 {
+  font-size: 2rem !important;
+}
+
+.size-preset-instax .map-labels {
+  bottom: 10px;
+}
+
+.size-preset-instax .map-labels h2 {
+  font-size: 1.5rem !important;
+}
+
+.size-preset-instax .map-labels p {
+  font-size: 1rem !important;
+}
+
+/* Screenshot mode sizing */
+.screenshot-mode .map-inner {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  aspect-ratio: unset !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.screenshot-mode[data-size="A4"] .map-inner {
+  width: 2480px !important;
+  height: 3508px !important;
+}
+
+.screenshot-mode[data-size="Polaroid"] .map-inner {
+  width: 2550px !important;
+  height: 3300px !important;
+}
+
+.screenshot-mode[data-size="Instax Mini"] .map-inner {
+  width: 637px !important;
+  height: 1016px !important;
+}
+
+/* Adjust labels for smaller formats */
+.screenshot-mode[data-size="Polaroid"] .map-labels h2 {
+  font-size: 2rem !important;
+}
+
+.screenshot-mode[data-size="Instax Mini"] .map-labels h2 {
+  font-size: 1.5rem !important;
+}
+
+.screenshot-mode[data-size="Instax Mini"] .map-labels p {
+  font-size: 1rem !important;
 }

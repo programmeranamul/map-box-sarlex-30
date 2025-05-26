@@ -11,7 +11,7 @@ export default function App() {
   const [locations, setLocations] = useState([]);
   const [title, setTitle] = useState("Honeymoon");
   const [description, setDescription] = useState("Julie & Alex");
-  const [mapSize, setMapSize] = useState("A3"); // Default to A3
+  const [mapSize, setMapSize] = useState("A4"); // Default to A3
   const [selectedStyleKey, setSelectedStyleKey] =
     useState(Object.keys(customStyles)[0]);
   const [camera, setCamera] = useState(null); // ← added camera state
@@ -19,9 +19,27 @@ export default function App() {
   const [isScreenshotMode, setIsScreenshotMode] = useState(false);
 
   const sizePresets = {
-    A4: { width: 794, height: 1123 }, // 72 DPI preview of 210mm x 297mm
-    A3: { width: 1123, height: 1587 }, // 297mm x 420mm
-    Polaroid: { width: 800, height: 950 }, // Approx. square with room for label
+    A4: { 
+      width: 794,     // 210mm @72dpi (preview)
+      height: 1123,   // 297mm @72dpi
+      printWidth: 2480, // 300dpi actual size
+      printHeight: 3508,
+      aspectRatio: 210/297
+    },
+    Polaroid: {
+      width: 600,     // ~79mm @72dpi
+      height: 600,    // Square preview
+      printWidth: 2550, // 300dpi (85x110mm)
+      printHeight: 3300,
+      aspectRatio: 85/110
+    },
+    "Instax Mini": {
+      width: 500,     // 54mm @72dpi
+      height: 800,    // 86mm @72dpi
+      printWidth: 637,  // 300dpi actual size
+      printHeight: 1016,
+      aspectRatio: 54/86
+    }
   };
 
   useEffect(() => {
@@ -79,6 +97,13 @@ export default function App() {
 
   const handleDownload = async () => {
     try {
+      const { printWidth, printHeight } = sizePresets[mapSize];
+    
+      // Validate print dimensions
+      if (!printWidth || !printHeight) {
+        throw new Error('Invalid print size selected');
+      }
+
       const map = window.__MAP__; // assuming you expose the map instance globally
       const bounds = map.getBounds(); // mapboxgl.LngLatBounds
       const camera = {
@@ -91,7 +116,8 @@ export default function App() {
           [bounds.getNorthEast().lng, bounds.getNorthEast().lat]
         ]
       };
-  
+      
+
       const resp = await fetch("/api/print-map", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -101,7 +127,9 @@ export default function App() {
           description,
           styleKey: selectedStyleKey,
           camera,
-          mapSize
+          mapSize,
+          printWidth,
+          printHeight
         })
       });
   
@@ -121,7 +149,9 @@ export default function App() {
   
 
   return (
-    <div className={`app-container ${isScreenshotMode ? "screenshot-mode" : ""}`}>
+    <div className={`app-container ${isScreenshotMode ? "screenshot-mode" : ""}`}
+    data-size={isScreenshotMode ? mapSize : null}
+    >
       <div className="left-panel">
         <h1>Create your travel map</h1>
 
@@ -197,7 +227,14 @@ export default function App() {
       </div>
 
       <div className="right-panel">
-        <div className="map-inner" ref={mapRef}>
+      <div className={`map-inner ${mapSize === 'Polaroid' ? 'size-preset-polaroid' : ''} ${mapSize === 'Instax Mini' ? 'size-preset-instax' : ''}`}
+        ref={mapRef}
+        style={{
+          '--map-width': `${sizePresets[mapSize].width}px`,
+          '--map-height': `${sizePresets[mapSize].height}px`,
+          '--map-aspect': sizePresets[mapSize].aspectRatio
+        }}
+      >
           <div className="map-area">
             <Map
               locations={locations}
