@@ -1,3 +1,4 @@
+// LocationsList.jsx
 import { useState } from "react";
 
 export default function LocationList({ locations, setLocations }) {
@@ -55,10 +56,31 @@ export default function LocationList({ locations, setLocations }) {
             <div className="reorder-buttons">
               <button onClick={() => moveItem(i, i - 1)} aria-label="Move up">↑</button>
               <button onClick={() => moveItem(i, i + 1)} aria-label="Move down">↓</button>
+              <button onClick={() => {
+                  const updated = [...locations];
+                  updated.splice(i, 1);
+                  setLocations(updated);
+                }} aria-label="Delete">×
+              </button>
             </div>
           </li>
         ))}
       </ul>
+      {locations.length > 0 && (
+        <button
+          onClick={() => setLocations([])}
+          style={{
+            marginTop: "12px",
+            background: "#ddd",
+            padding: "6px 10px",
+            borderRadius: "4px",
+            fontSize: "0.85rem",
+            cursor: "pointer"
+          }}
+        >
+          Reset All Locations
+        </button>
+      )}
     </div>
   );
 }

@@ -207,8 +207,9 @@ html, body, #root {
 .map-inner {
   position: relative;
   width: 100%;
+  aspect-ratio: 210 / 297; /* ≈ 0.707 */
   max-height: 95vh; /* 👈 Add this line */
-  aspect-ratio: 3 / 4;
+  max-width: calc(95vh * 0.707); /* auto width to keep A4 aspect */
   background: #fff;
   border: 4px solid #000;    /* thin black edge */
   border-radius: 2px;        /* slight softening */
@@ -221,8 +222,6 @@ html, body, #root {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  max-width: 600px;
 }
 
 /* Actual map “photo” inset */

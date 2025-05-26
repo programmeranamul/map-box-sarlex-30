@@ -70,6 +70,17 @@ const mapStyles  = {
   "IMP V2 Grey": styleLight
 };
 
+async function getCountryBbox(lngLat) {
+  const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${lngLat[0]},${lngLat[1]}.json` +
+              `?types=country&access_token=${mapboxgl.accessToken}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  if (data.features && data.features[0] && data.features[0].bbox) {
+    return data.features[0].bbox; // [minLng,minLat,maxLng,maxLat]
+  }
+  return null;
+}
+
 export default function Map({ locations, styleJSON, camera, isScreenshotMode }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
@@ -78,6 +89,9 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
   const labelSourceId = "label-source";
   const labelLayerId = "label-layer";
   const styleKey = styleJSON['name'];
+  const minimapRef = useRef(null);
+  const minimapMarkerRef = useRef(null);
+  const prevLocations = useRef([]);
 
   useEffect(() => {
     if (isScreenshotMode && map.current) {
@@ -116,99 +130,36 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
 
       // ✅ Step 1: Create outer container
       const minimapContainer = document.createElement('div');
-      minimapContainer.className = 'minimap-container'; // This sets size, border, etc.
+      minimapContainer.className = 'minimap-container';
 
-      // ✅ Step 2: Append to DOM first
+      // ✅ Step 2: Append to DOM
       map.current.getContainer().appendChild(minimapContainer);
 
-      // ✅ Step 3: Create inner container with full size
+      // ✅ Step 3: Inner container
       const minimapInnerContainer = document.createElement('div');
       minimapInnerContainer.style.width = '100%';
       minimapInnerContainer.style.height = '100%';
-
-      // ✅ Step 4: Append inner container to outer container
       minimapContainer.appendChild(minimapInnerContainer);
 
-      // ✅ Step 5: Initialize minimap AFTER container is mounted
-      const minimap = new mapboxgl.Map({
+      // ✅ Step 4: Initialize minimap
+      minimapRef.current = new mapboxgl.Map({
         container: minimapInnerContainer,
         style: styleJSON,
-        center: [78.9629, 20.5937],
-        zoom: 3.5,
         interactive: false,
         attributionControl: false,
-        preserveDrawingBuffer: true,
-        maxBounds: [
-          [68.1, 6.7],
-          [97.4, 35.7]
-        ]
+        preserveDrawingBuffer: true
       });
-    
-      // Add viewport box
-      minimap.on('load', () => {
-        // Add bounding box layer
-        minimap.addSource('viewport', {
-          type: 'geojson',
-          data: {
-            type: 'Feature',
-            geometry: {
-              type: 'Polygon',
-              coordinates: [[]]
-            }
-          }
-        });
-        
-        minimap.addLayer({
-          id: 'viewport-box',
-          type: 'line',
-          source: 'viewport',
-          paint: {
-            'line-color': '#FF0000',
-            'line-width': 2
-          }
-        });
-    
-        // Hide unnecessary map elements
-        minimap.setRenderWorldCopies(false); // Hide other countries
-        minimap.setPadding({ top: 10, bottom: 10, left: 10, right: 10 });
-
-        minimap.resize();
+      
+      minimapRef.current.on('load', () => {
+        minimapRef.current.setRenderWorldCopies(false);
+        minimapRef.current.resize();
       });
-    
-      // Update viewport box position
-      const updateViewportBox = () => {
-        const bounds = map.current.getBounds();
-        const coordinates = [
-          [bounds.getWest(), bounds.getSouth()],
-          [bounds.getEast(), bounds.getSouth()],
-          [bounds.getEast(), bounds.getNorth()],
-          [bounds.getWest(), bounds.getNorth()],
-          [bounds.getWest(), bounds.getSouth()]
-        ];
-        
-        if (minimap.getSource('viewport')) {
-          minimap.getSource('viewport').setData({
-            type: 'Feature',
-            geometry: {
-              type: 'Polygon',
-              coordinates: [coordinates]
-            }
-          });
-          
-          // Maintain India-centric view
-          minimap.fitBounds([[68.1, 6.7], [97.4, 35.7]], {
-            padding: 20,
-            duration: 0
-          });
-        }
-      };
-    
-      map.current.on('moveend', updateViewportBox);
       
 
     } else {
       map.current.setStyle(styleJSON);
-
+      minimapRef.current.setStyle(styleJSON);
+      
       if (camera?.center) {
         map.current.setCenter(camera.center);
       }
@@ -229,9 +180,34 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
   }, [styleJSON, camera]);
 
   useEffect(() => {
-    if (!map.current || !locations.length) return;
+
+    const shouldRedraw =
+    locations.length === 0 ||
+    locations.length !== prevLocations.current.length ||
+    locations.some((loc, i) =>
+      !prevLocations.current[i] ||
+      loc.name !== prevLocations.current[i].name ||
+      loc.coords[0] !== prevLocations.current[i].coords[0] ||
+      loc.coords[1] !== prevLocations.current[i].coords[1]
+    );
+
+    if (!map.current) return;
     let style = mapStyles[styleKey];
     
+    if (locations.length === 0) {
+      markers.current.forEach(marker => marker.remove());
+      markers.current = [];
+  
+      if (map.current.getLayer("route")) map.current.removeLayer("route");
+      if (map.current.getSource("route")) map.current.removeSource("route");
+  
+      if (map.current.getLayer("label-layer")) map.current.removeLayer("label-layer");
+      if (map.current.getSource("label-source")) map.current.removeSource("label-source");
+  
+      prevLocations.current = [];
+      return;
+    }
+
     const applyLocationLogic = () => {
       // Remove old markers
       markers.current.forEach(marker => marker.remove());
@@ -273,20 +249,21 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
         el.style.borderRadius = "50%";
 
         // Number element
-        const numberText = loc.number ? loc.number : index + 1;
-        const number = document.createElement("span");
-        number.textContent = numberText; // Sequence starts at 1
-        number.style.position = "absolute";
-        number.style.top = "50%";
-        number.style.left = "50%";
-        number.style.transform = "translate(-50%, -50%)";
-        number.style.color = style.markerTextColor; // Use the new color
-        number.style.fontFamily = style.labelFontFamily.join(", ");
-        number.style.fontSize = "10px";
-        number.style.fontWeight = "bold";
-        number.style.userSelect = "none"; // Prevent text selection
-
-        el.appendChild(number);
+        if (!el.querySelector(".marker-number")) {
+          const number = document.createElement("span");
+          number.className = "marker-number";
+          number.textContent = index + 1; // Sequence starts at 1
+          number.style.position = "absolute";
+          number.style.top = "50%";
+          number.style.left = "50%";
+          number.style.transform = "translate(-50%, -50%)";
+          number.style.color = style.markerTextColor; // Use the new color
+          number.style.fontFamily = style.labelFontFamily.join(", ");
+          number.style.fontSize = "10px";
+          number.style.fontWeight = "bold";
+          number.style.userSelect = "none"; // Prevent text selection
+          el.appendChild(number);
+        }
 
         // Create and add marker
         const marker = new mapboxgl.Marker({ element: el })
@@ -383,6 +360,49 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
           })
           .catch((err) => console.error("Directions API error:", err));
       }
+
+      // minimap
+      const applyMinimap = async () => {
+        const mini = minimapRef.current;
+        // clear old marker
+        minimapMarkerRef.current?.remove();
+        // add start marker
+        const start = locations[0].coords;
+        minimapMarkerRef.current = new mapboxgl.Marker({ color: '#E63946' })
+          .setLngLat(start)
+          .addTo(mini);
+  
+        // determine aggregated bounds
+        const countryBboxes = await Promise.all(
+          locations.map(loc => getCountryBbox(loc.coords))
+        );
+        // filter nulls & merge
+        const boxes = countryBboxes.filter(b => b);
+        let merged;
+        if (boxes.length === 1) {
+          merged = boxes[0];
+        } else if (boxes.length > 1) {
+          // merge multiple country bboxes
+          const lons = boxes.flatMap(b => [b[0], b[2]]);
+          const lats = boxes.flatMap(b => [b[1], b[3]]);
+          merged = [Math.min(...lons), Math.min(...lats), Math.max(...lons), Math.max(...lats)];
+        } else {
+          // fallback to global
+          merged = [-180, -85, 180, 85];
+        }
+  
+        // fit to merged country/continent/global bbox
+        mini.fitBounds(
+          [[merged[0], merged[1]], [merged[2], merged[3]]],
+          { padding: 20, duration: 0 }
+        );
+      };
+  
+      if (minimapRef.current.isStyleLoaded()) {
+        applyMinimap();
+      } else {
+        minimapRef.current.once('style.load', applyMinimap);
+      }
     }
 
     // Wait for style to be ready before applying sources/layers
@@ -391,6 +411,8 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode }) 
     } else {
       map.current.once("style.load", applyLocationLogic);
     }
+
+    prevLocations.current = locations;
 
   }, [locations, styleJSON, styleKey]);
 
