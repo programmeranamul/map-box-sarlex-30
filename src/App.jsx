@@ -153,7 +153,7 @@ export default function App() {
     data-size={isScreenshotMode ? mapSize : null}
     >
       <div className="left-panel">
-        <h1>Create your travel map</h1>
+        <h1>Add your travel pins</h1>
 
         <section>
           <h3>1. Add your locations</h3>
@@ -230,8 +230,6 @@ export default function App() {
       <div className={`map-inner ${mapSize === 'Polaroid' ? 'size-preset-polaroid' : ''} ${mapSize === 'Instax Mini' ? 'size-preset-instax' : ''}`}
         ref={mapRef}
         style={{
-          '--map-width': `${sizePresets[mapSize].width}px`,
-          '--map-height': `${sizePresets[mapSize].height}px`,
           '--map-aspect': sizePresets[mapSize].aspectRatio
         }}
       >
@@ -241,6 +239,7 @@ export default function App() {
               styleJSON={customStyles[selectedStyleKey]}
               camera={camera}
               isScreenshotMode={isScreenshotMode}
+              mapSize={mapSize}
             />
             <div className="map-labels">
               <h2>{title}</h2>

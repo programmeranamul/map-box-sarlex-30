@@ -92,7 +92,7 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode, ma
   const minimapRef = useRef(null);
   const minimapMarkerRef = useRef(null);
   const prevLocations = useRef([]);
-  const showMinimap = true;
+  const showMinimap = false;
 
   useEffect(() => {
     if (isScreenshotMode && map.current) {
@@ -104,8 +104,10 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode, ma
         if (camera?.bearing !== undefined) map.current.setBearing(camera.bearing);
         if (camera?.pitch !== undefined) map.current.setPitch(camera.pitch);
       }, 0); // Adjust delay as needed
+    } else if (map.current) {
+      map.current.resize();
     }
-  }, [isScreenshotMode, camera]);
+  }, [isScreenshotMode, camera, mapSize]);
 
   useEffect(() => {
 
