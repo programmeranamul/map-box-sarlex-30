@@ -21,7 +21,9 @@ app.post("/api/print-map", async (req, res) => {
     // you can add '--no-sandbox' if your env requires it
     args: ["--disable-gpu"],
     defaultViewport: null,
-    timeout: 0,            // disable launch timeout
+    timeout: 0,
+    devtools:true,
+    headless: false,       // disable launch timeout
   });
   const page = await browser.newPage();
 
@@ -73,7 +75,7 @@ app.post("/api/print-map", async (req, res) => {
   const posterHandle = await page.$(".map-inner");
   const buffer = await posterHandle.screenshot({ type: "png" });
   
-  await browser.close();
+  // await browser.close();
 
   // 8) Return the PNG
   res.set("Content-Type", "image/png");

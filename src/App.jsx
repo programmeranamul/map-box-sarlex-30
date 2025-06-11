@@ -83,6 +83,7 @@ export default function App() {
     const qPitch = parseFloat(params.get("pitch"));
 
     const qBounds = params.get("bounds");
+    console.log('qBounds', qBounds);
     if (qCenter || qZoom || qBearing || qPitch) {
       const parsedCamera = {
         bounds: JSON.parse(qBounds), // bounds = [[sw_lng, sw_lat], [ne_lng, ne_lat]]
@@ -233,14 +234,17 @@ export default function App() {
           '--map-aspect': sizePresets[mapSize].aspectRatio
         }}
       >
-          <div className="map-area">
-            <Map
+          <div className={`map-area ${isScreenshotMode ? "" : ""}`}>
+            { (true) && (
+              <Map
               locations={locations}
               styleJSON={customStyles[selectedStyleKey]}
               camera={camera}
               isScreenshotMode={isScreenshotMode}
               mapSize={mapSize}
             />
+            )
+          }
             <div className="map-labels">
               <h2>{title}</h2>
               <p>{description}</p>

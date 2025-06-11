@@ -89,20 +89,21 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode, ma
   const labelSourceId = "label-source";
   const labelLayerId = "label-layer";
   const styleKey = styleJSON['name'];
-  const minimapRef = useRef(null);
-  const minimapMarkerRef = useRef(null);
-  const prevLocations = useRef([]);
-  const showMinimap = false;
 
   useEffect(() => {
     if (isScreenshotMode && map.current) {
       setTimeout(() => {
         map.current.resize();
-        // Re-apply camera settings after resize
-        if (camera?.center) map.current.setCenter(camera.center);
-        if (camera?.zoom !== undefined) map.current.setZoom(camera.zoom);
         if (camera?.bearing !== undefined) map.current.setBearing(camera.bearing);
         if (camera?.pitch !== undefined) map.current.setPitch(camera.pitch);
+        const cameraBounds = camera?.bounds;
+        const cameraZoom = camera?.zoom;
+        if (cameraBounds) {
+          console.log('fitting bounds later', cameraBounds);
+          map.current.fitBounds(cameraBounds);
+          console.log('fitting zoom later', cameraZoom);
+          map.current.setZoom(cameraZoom);
+        }
       }, 0); // Adjust delay as needed
     } else if (map.current) {
       map.current.resize();
@@ -110,19 +111,12 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode, ma
   }, [isScreenshotMode, camera, mapSize]);
 
   useEffect(() => {
-
-    const initialCenter = camera?.center || [76.6950, 11.4102];
-    const initialZoom = camera?.zoom ?? 8;
-    const initialBearing = camera?.bearing ?? 0;
-    const initialPitch = camera?.pitch ?? 0;
+    console.log('camera', camera)
+    const cameraBounds = camera?.bounds;
 
     const mapInitOptions = {
       container: mapContainer.current,
       style: styleJSON,
-      center: initialCenter,
-      zoom: initialZoom,
-      bearing: initialBearing,
-      pitch: initialPitch,
       interactive: true,
       preserveDrawingBuffer: true,
       attributionControl: false,
@@ -131,52 +125,14 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode, ma
     if (!map.current) {
       map.current = new mapboxgl.Map(mapInitOptions);
 
-      if (showMinimap) {
-          // ✅ Step 1: Create outer container
-          const minimapContainer = document.createElement('div');
-          minimapContainer.className = 'minimap-container';
-
-          // ✅ Step 2: Append to DOM
-          map.current.getContainer().appendChild(minimapContainer);
-
-          // ✅ Step 3: Inner container
-          const minimapInnerContainer = document.createElement('div');
-          minimapInnerContainer.style.width = '100%';
-          minimapInnerContainer.style.height = '100%';
-          minimapContainer.appendChild(minimapInnerContainer);
-
-          // ✅ Step 4: Initialize minimap
-          minimapRef.current = new mapboxgl.Map({
-            container: minimapInnerContainer,
-            style: styleJSON,
-            interactive: false,
-            attributionControl: false,
-            preserveDrawingBuffer: true
-          });
-
-          minimapRef.current.on('load', () => {
-            minimapRef.current.setRenderWorldCopies(false);
-            minimapRef.current.resize();
-          });
-      }
-      
-
+      map.current.on('load', () => {
+        if (cameraBounds) {
+          console.log('fitting bounds', cameraBounds);
+          map.current.fitBounds(cameraBounds);
+        }
+      });
     } else {
       map.current.setStyle(styleJSON);
-      minimapRef.current?.setStyle(styleJSON);
-
-      if (camera?.center) {
-        map.current.setCenter(camera.center);
-      }
-      if (typeof camera?.zoom === "number") {
-        map.current.setZoom(camera.zoom);
-      }
-      if (typeof camera?.bearing === "number") {
-        map.current.setBearing(camera.bearing);
-      }
-      if (typeof camera?.pitch === "number") {
-        map.current.setPitch(camera.pitch);
-      }
     }
   
     // 👇 Expose actual map instance for Puppeteer
@@ -198,8 +154,6 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode, ma
   
       if (map.current.getLayer("label-layer")) map.current.removeLayer("label-layer");
       if (map.current.getSource("label-source")) map.current.removeSource("label-source");
-  
-      prevLocations.current = [];
       return;
     }
 
@@ -309,7 +263,7 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode, ma
         // Fit all markers with padding
         if (!isScreenshotMode) {
           map.current.fitBounds(bounds, {
-            padding: isScreenshotMode ? 0: 100,
+            padding: 0,
             maxZoom: 12,
             linear: true
           });
@@ -353,49 +307,6 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode, ma
           })
           .catch((err) => console.error("Directions API error:", err));
       }
-
-      // minimap
-      const applyMinimap = async () => {
-        const mini = minimapRef.current;
-        // clear old marker
-        minimapMarkerRef.current?.remove();
-        // add start marker
-        const start = locations[0].coords;
-        minimapMarkerRef.current = new mapboxgl.Marker({ color: '#E63946' })
-          .setLngLat(start)
-          .addTo(mini);
-  
-        // determine aggregated bounds
-        const countryBboxes = await Promise.all(
-          locations.map(loc => getCountryBbox(loc.coords))
-        );
-        // filter nulls & merge
-        const boxes = countryBboxes.filter(b => b);
-        let merged;
-        if (boxes.length === 1) {
-          merged = boxes[0];
-        } else if (boxes.length > 1) {
-          // merge multiple country bboxes
-          const lons = boxes.flatMap(b => [b[0], b[2]]);
-          const lats = boxes.flatMap(b => [b[1], b[3]]);
-          merged = [Math.min(...lons), Math.min(...lats), Math.max(...lons), Math.max(...lats)];
-        } else {
-          // fallback to global
-          merged = [-180, -85, 180, 85];
-        }
-  
-        // fit to merged country/continent/global bbox
-        mini.fitBounds(
-          [[merged[0], merged[1]], [merged[2], merged[3]]],
-          { padding: 20, duration: 0 }
-        );
-      };
-  
-      if (minimapRef.current?.isStyleLoaded()) {
-        applyMinimap();
-      } else {
-        minimapRef.current?.once('style.load', applyMinimap);
-      }
     }
 
     // Wait for style to be ready before applying sources/layers
@@ -404,8 +315,6 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode, ma
     } else {
       map.current.once("style.load", applyLocationLogic);
     }
-
-    prevLocations.current = locations;
 
   }, [locations, styleJSON, styleKey]);
 
