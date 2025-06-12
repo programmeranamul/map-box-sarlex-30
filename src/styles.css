@@ -216,11 +216,6 @@ html, body, #root {
   overflow: hidden;
 }
 
-.screenshot-map {
-  height: 400px;
-  width: 300px;
-}
-
 /* Mapbox canvas fills its container */
 .mapbox-map {
   position: absolute;
@@ -280,47 +275,6 @@ html, body, #root {
 .mapbox-improve-map,
 .mapboxgl-ctrl-compass {
   display: none !important;
-}
-
-.screenshot-mode .left-panel {
-  display: none;
-}
-
-.screenshot-mode .right-panel {
-  width: 100vw;
-  height: 100vh;
-  padding: 2rem; /* Give some space around the preview for admins */
-  background-color: #4a4a4a; /* A neutral dark background for better contrast */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden; /* Prevent unwanted scrollbars */
-  box-sizing: border-box; /* Ensure padding is included in dimensions */
-}
-
-/*
-  This is the corrected responsive solution.
-  It gives the browser an initial width to resolve the layout.
-*/
-.screenshot-mode .map-inner {
-  position: relative;
-  display: block; /* Behave as a standard block element */
-  
-  /* Define the shape */
-  aspect-ratio: var(--map-aspect);
-
-  /* Define the sizing behavior */
-  width: 100%; /* Start by filling the container's width */
-  height: auto; /* Height will be calculated from width + aspect-ratio */
-  
-  /* Set constraints to ensure it fits */
-  max-width: 100%;
-  max-height: 100%;
-
-  /* Visual styles for the preview */
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-  border: 1px solid rgba(255,255,255,0.8);
-  padding: 0 !important;
 }
 
 .size-options {
