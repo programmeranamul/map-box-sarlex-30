@@ -91,9 +91,25 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode, ma
   const styleKey = styleJSON['name'];
 
   useEffect(() => {
+
+    const initialCenter = camera?.center || [76.6950, 11.4102];
+    const initialZoom = camera?.zoom ?? 8;
+    const initialBearing = camera?.bearing ?? 0;
+    const initialPitch = camera?.pitch ?? 0;
+
+    console.log("Camera settings:", {
+      center: initialCenter,
+      zoom: initialZoom,
+      bearing: initialBearing,
+      pitch: initialPitch
+    });
     const mapInitOptions = {
       container: mapContainer.current,
       style: styleJSON,
+      center: initialCenter,
+      zoom: initialZoom,
+      bearing: initialBearing,
+      pitch: initialPitch,
       interactive: true,
       preserveDrawingBuffer: true,
       attributionControl: false,
@@ -102,7 +118,22 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode, ma
     if (!map.current) {
       map.current = new mapboxgl.Map(mapInitOptions);
     } else {
+      console.warn("Map instance already exists, skipping initialization.");
+      console.log('setting new camera settings', camera);
       map.current.setStyle(styleJSON);
+
+      if (camera?.center) {
+        map.current.setCenter(camera.center);
+      }
+      if (typeof camera?.zoom === "number") {
+        map.current.setZoom(camera.zoom);
+      }
+      if (typeof camera?.bearing === "number") {
+        map.current.setBearing(camera.bearing);
+      }
+      if (typeof camera?.pitch === "number") {
+        map.current.setPitch(camera.pitch);
+      }
     }
   
     // 👇 Expose actual map instance for Puppeteer
@@ -231,13 +262,11 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode, ma
         map.current.setZoom(12);
       } else {
         // Fit all markers with padding
-        if (!isScreenshotMode) {
-          map.current.fitBounds(bounds, {
-            padding: 0,
-            maxZoom: 12,
-            linear: true
-          });
-        }
+        map.current.fitBounds(bounds, {
+          padding: 100,
+          maxZoom: 12,
+          linear: true
+        });
 
         // Build a request to the Directions API
         const coords = locations.map((loc) => loc.coords.join(',')).join(';');
