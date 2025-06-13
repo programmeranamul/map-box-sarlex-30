@@ -626,3 +626,20 @@ html, body, #root {
   background: #e0e0e0;
   border-color: #ccc;
 }
+
+.screenshot-mode .left-panel {
+  display: none;
+}
+
+.screenshot-mode .right-panel {
+  width: 100vw;
+  padding: 0;
+}
+
+.screenshot-mode .map-inner {
+  width: var(--forced-width) !important;
+  height: var(--forced-height) !important;
+  aspect-ratio: auto !important;
+  max-width: none !important;
+  max-height: none !important;
+}

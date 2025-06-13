@@ -14,7 +14,7 @@ const sizePresets = {
 app.use(bodyParser.json({ limit: "1mb" }));
 
 app.post("/api/print-map", async (req, res) => {
-  const { locations, title, description, styleKey, camera, mapSize } = req.body;
+  const { locations, title, description, styleKey, camera, mapSize, clientWidth, clientHeight } = req.body;
   console.log(camera);
   // 1) Launch Puppeteer with no navigation timeouts
   const browser = await puppeteer.launch({
@@ -28,11 +28,15 @@ app.post("/api/print-map", async (req, res) => {
   const page = await browser.newPage();
 
   const { width, height } = sizePresets[mapSize] || sizePresets.A4;
-
+  const deviceScaleFactor = Math.min(
+      width / clientWidth,
+      height / clientHeight
+    );
+  console.log('deviceScaleFactor', deviceScaleFactor);
   await page.setViewport({
     width,
     height,
-    deviceScaleFactor: 1, // Use 1:1 pixels since we're setting true dimensions
+    deviceScaleFactor:deviceScaleFactor
   });
 
   // 3) Build editor URL with your query params
@@ -42,7 +46,8 @@ app.post("/api/print-map", async (req, res) => {
   editorUrl.searchParams.set("title", title);
   editorUrl.searchParams.set("description", description);
   editorUrl.searchParams.set("locs", JSON.stringify(locations));
-
+  editorUrl.searchParams.set("width", clientWidth);
+  editorUrl.searchParams.set("height", clientHeight);
   if (camera) {
     editorUrl.searchParams.set("center", JSON.stringify(camera.center));
     editorUrl.searchParams.set("zoom", camera.zoom);

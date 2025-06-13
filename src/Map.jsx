@@ -120,6 +120,7 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode, ma
     } else {
       console.warn("Map instance already exists, skipping initialization.");
       console.log('setting new camera settings', camera);
+      map.current.resize();
       map.current.setStyle(styleJSON);
 
       if (camera?.center) {
@@ -261,12 +262,14 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode, ma
         map.current.setCenter(locations[0].coords);
         map.current.setZoom(12);
       } else {
-        // Fit all markers with padding
-        map.current.fitBounds(bounds, {
-          padding: 100,
-          maxZoom: 12,
-          linear: true
-        });
+        if (!isScreenshotMode) {
+          // Fit all markers with padding
+          map.current.fitBounds(bounds, {
+            padding: 100,
+            maxZoom: 12,
+            linear: true
+          });
+        }
 
         // Build a request to the Directions API
         const coords = locations.map((loc) => loc.coords.join(',')).join(';');

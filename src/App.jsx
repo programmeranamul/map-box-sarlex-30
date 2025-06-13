@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // App.jsx
 import React, { useState, useRef } from "react";
 import Map from "./Map";
@@ -17,6 +18,7 @@ export default function App() {
   const [camera, setCamera] = useState(null); // ← added camera state
   const mapRef = useRef(null);
   const [isScreenshotMode, setIsScreenshotMode] = useState(false);
+  const [forcedSize, setForcedSize] = useState(null);
 
   const sizePresets = {
     A4: { 
@@ -56,7 +58,13 @@ export default function App() {
     if (qStyle && customStyles[qStyle]) {
       setSelectedStyleKey(qStyle);
     }
-  
+    
+    const qWidth = parseInt(params.get("clientWidth"));
+    const qHeight = parseInt(params.get("clientHeight"));
+    if (qWidth && qHeight) {
+      setForcedSize({ width: qWidth, height: qHeight });
+    }
+
     // Locations
     const qLocs = params.get("locs");
     if (qLocs) {
@@ -98,6 +106,11 @@ export default function App() {
 
   const handleDownload = async () => {
     try {
+      const container = mapRef.current;
+      const { width: clientWidth, height: clientHeight } = container.getBoundingClientRect();
+      console.log('container', mapRef);
+      console.log('ref', container);
+      console.log('clientWidth', clientWidth, 'clientHeight', clientHeight);
       const { printWidth, printHeight } = sizePresets[mapSize];
     
       // Validate print dimensions
@@ -130,7 +143,9 @@ export default function App() {
           camera,
           mapSize,
           printWidth,
-          printHeight
+          printHeight,
+          clientWidth,
+          clientHeight,
         })
       });
   
@@ -231,7 +246,9 @@ export default function App() {
       <div className={`map-inner ${mapSize === 'Polaroid' ? 'size-preset-polaroid' : ''} ${mapSize === 'Instax Mini' ? 'size-preset-instax' : ''}`}
         ref={mapRef}
         style={{
-          '--map-aspect': sizePresets[mapSize].aspectRatio
+          '--map-aspect': sizePresets[mapSize].aspectRatio,
+          '--forced-width': `363.8125px`,
+          '--forced-height': `514.5499877929688px`,
         }}
       >
           <div className={`map-area ${isScreenshotMode ? "" : ""}`}>
