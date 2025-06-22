@@ -140,7 +140,7 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode, ma
     // 👇 Expose actual map instance for Puppeteer
     window.__MAP__ = map.current;
   
-  }, [styleJSON, camera]);
+  }, [styleJSON, camera, mapSize]);
 
   useEffect(() => {
 

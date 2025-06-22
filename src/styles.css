@@ -643,3 +643,97 @@ html, body, #root {
   max-width: none !important;
   max-height: none !important;
 }
+
+/*-------------------------------------------------
+  📱 Responsive Adjustments for Mobile Screens
+-------------------------------------------------*/
+
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .right-panel {
+    flex: 0 0 auto;
+    height: auto;
+    padding: 20px;
+    order: -1; /* 👈 This makes it appear first */
+  }
+
+  .map-frame {
+    padding: 20px;
+    max-height: 60vh;
+  }
+
+  .left-panel {
+    flex: 0 0 auto;
+    max-width: 100%;
+    padding: 24px;
+    order: 1;
+  }
+
+  .map-inner {
+    height: auto;
+    max-height: 60vh;
+    width: 100%;
+  }
+
+  .map-labels h2 {
+    font-size: 1.8rem;
+  }
+
+  .map-labels p {
+    font-size: 1.1rem;
+  }
+
+  .size-options {
+    flex-wrap: wrap;
+  }
+
+  .size-button {
+    flex: 1 0 45%;
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .color-dot {
+    width: 32px;
+    height: 32px;
+  }
+
+  .download-button {
+    padding: 14px;
+    font-size: 1rem;
+  }
+
+  .location-item {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .add-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+  }
+
+  .reset-all-btn {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+
+  .minimap-container {
+    width: 120px;
+    height: 120px;
+    top: 8px;
+    right: 8px;
+  }
+
+  /* Hide minimap entirely on very small screens */
+  @media (max-width: 480px) {
+    .minimap-container {
+      display: none;
+    }
+  }
+}
