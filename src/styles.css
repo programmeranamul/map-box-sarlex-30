@@ -243,8 +243,8 @@ html, body, #root {
 
 /* Labels over map fade */
 .map-labels {
-  position: absolute;
-  bottom: 24px;
+  /* position: absolute;
+  bottom: 24px; */
   width: 100%;
   padding: 0 20px;
   text-align: center;
