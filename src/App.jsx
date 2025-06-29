@@ -8,7 +8,25 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import "./styles.css";
 import { useEffect } from "react";
 
-const titleStyle = ["Top", "Bottom"];
+// const titleStyle = ["Style 1", "Style 2", "Style 3", "Style 4"];
+const titleStyle = [
+  {
+    key: "Style 1",
+    value: "style-1",
+  },
+  {
+    key: "Style 2",
+    value: "style-2",
+  },
+  {
+    key: "Style 3",
+    value: "style-3",
+  },
+  {
+    key: "Style 4",
+    value: "style-4",
+  },
+];
 
 export default function App() {
   const [locations, setLocations] = useState([]);
@@ -22,7 +40,7 @@ export default function App() {
   const mapRef = useRef(null);
   const [isScreenshotMode, setIsScreenshotMode] = useState(false);
   const [forcedSize, setForcedSize] = useState(null);
-  const [textPositionTop, setTextPositionTop] = useState("Bottom");
+  const [textStyle, setTextStyle] = useState(titleStyle[2].value);
 
   const sizePresets = {
     A4: {
@@ -219,15 +237,15 @@ export default function App() {
         <section>
           <h3>5. Choose Text Position</h3>
           <div className="size-options">
-            {titleStyle.map((pos) => (
+            {titleStyle.map((style) => (
               <button
-                key={pos}
+                key={style.value}
                 className={`size-button ${
-                  textPositionTop === pos ? "selected" : ""
+                  textStyle === style.value ? "selected" : ""
                 }`}
-                onClick={() => setTextPositionTop(pos)}
+                onClick={() => setTextStyle(style.value)}
               >
-                {pos}
+                {style.key}
               </button>
             ))}
           </div>
@@ -269,30 +287,100 @@ export default function App() {
             "--forced-height": `514.5499877929688px`,
           }}
         >
-          <div
-            className={`map-labels ${
-              textPositionTop === "Top" ? "" : "flex-order-1"
-            }`}
-          >
-            <div className="map-title-box ">
-              <h2>{title}</h2>
-              <p>{description}</p>
-            </div>
-          </div>
-
-          <div className="map-wrapper">
+          {/* <div className="map-wrapper">
             <div className={`map-area ${isScreenshotMode ? "" : ""}`}>
-              {true && (
-                <Map
-                  locations={locations}
-                  styleJSON={customStyles[selectedStyleKey]}
-                  camera={camera}
-                  isScreenshotMode={isScreenshotMode}
-                  mapSize={mapSize}
-                />
-              )}
+              <Map
+                locations={locations}
+                styleJSON={customStyles[selectedStyleKey]}
+                camera={camera}
+                isScreenshotMode={isScreenshotMode}
+                mapSize={mapSize}
+              />
             </div>
-          </div>
+          </div> */}
+
+          {textStyle === "style-4" ? (
+            <>
+              <div className={`map-labels map-labels-style-4`}>
+                <div className="map-title-box ">
+                  <h2>{title}</h2>
+                  <p className="name">{description}</p>
+                </div>
+                <p className="coordinates">26 n / 28 f</p>
+              </div>
+
+              <div className="map-wrapper">
+                <div className={`map-area ${isScreenshotMode ? "" : ""}`}>
+                  <Map
+                    locations={locations}
+                    styleJSON={customStyles[selectedStyleKey]}
+                    camera={camera}
+                    isScreenshotMode={isScreenshotMode}
+                    mapSize={mapSize}
+                  />
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="map-wrapper">
+                <div className={`map-area ${isScreenshotMode ? "" : ""}`}>
+                  <Map
+                    locations={locations}
+                    styleJSON={customStyles[selectedStyleKey]}
+                    camera={camera}
+                    isScreenshotMode={isScreenshotMode}
+                    mapSize={mapSize}
+                  />
+                </div>
+              </div>
+
+              <div className={`map-labels map-labels-${textStyle}`}>
+                <div className="map-title-box ">
+                  <h2>{title}</h2>
+                  <div>
+                    <p className="name">{description}</p>
+                    <p className="coordinates">26 n / 28 f</p>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* Conditionally render text styles based on selected style */}
+          {/* {textStyle === "style-1" && (
+            <div className={`map-labels text-style-1`}>
+              <div className="map-title-box ">
+                <h2>{title}</h2>
+                <div>
+                  <p className="text-bold">{description}</p>
+                  <p>26 n / 28 f</p>
+                </div>
+              </div>
+            </div>
+          )} */}
+
+          {/* {textStyle === "style-2" && (
+            <div className={`map-labels map-labels-style-2`}>
+              <h2>{title}</h2>
+              <div>
+                <p className="text-bold">{description}</p>
+                <p>26 n / 28 f</p>
+              </div>
+            </div>
+          )} */}
+
+          {/* {textStyle === "style-3" && (
+            <div className={`map-labels map-labels-style-3`}>
+              <div className="map-labels-wrapper border-4 border-top">
+                <h2>{title}</h2>
+                <div>
+                  <p className="text-bold">{description}</p>
+                  <p>26 n / 28 f</p>
+                </div>
+              </div>
+            </div>
+          )} */}
         </div>
       </div>
     </div>

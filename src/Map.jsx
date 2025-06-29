@@ -122,6 +122,7 @@ export default function Map({ locations, styleJSON, camera, isScreenshotMode, ma
       console.log('setting new camera settings', camera);
       map.current.resize();
       map.current.setStyle(styleJSON);
+      // map.current.setStyle("mapbox://styles/mapbox/light-v11");
 
       if (camera?.center) {
         map.current.setCenter(camera.center);
